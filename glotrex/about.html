@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Glotrex International</title>
+  <meta name="description"
+    content="Glotrex International — led by Mr. Premsagar Mehetre, Expert Export Manager. Ground-zero operations, 100% Indian origin, global trade specialists." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── About-specific ────────────────────────────── */
+    .about-hero {
+      min-height: 72vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 5rem;
+      overflow: hidden;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    @media(max-width:768px) {
+      .identity-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* Expert card */
+    .expert-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expert-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--green-tint), transparent);
+      opacity: .5;
+    }
+
+    .expert-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 8px 24px rgba(42, 110, 78, .22);
+    }
+
+    .expert-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      margin-bottom: .2rem;
+      color: var(--ink);
+    }
+
+    .expert-role {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+    }
+
+    .expert-card blockquote {
+      font-family: var(--font-display);
+      font-size: .98rem;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      border-left: 3px solid var(--green);
+      padding-left: 1rem;
+    }
+
+    /* DNA grid — 3 col */
+    .dna-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+
+    @media(max-width:900px) {
+      .dna-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:540px) {
+      .dna-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Philosophy — horizontal on desktop, vertical on mobile */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .philosophy-step {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      transition: background var(--t-fast);
+    }
+
+    .philosophy-step:last-child {
+      border-right: none;
+    }
+
+    .philosophy-step:hover {
+      background: var(--bg-soft);
+    }
+
+    .phi-num {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--bg-muted);
+      line-height: 1;
+      margin-bottom: .2rem;
+    }
+
+    .phi-label {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: .6rem;
+    }
+
+    .philosophy-step p {
+      font-size: .84rem;
+    }
+
+    @media(max-width:768px) {
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .philosophy-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .philosophy-step:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* Diff rows */
+    .diff-row {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .diff-row:last-child {
+      border-bottom: none;
+    }
+
+    .diff-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: var(--r);
+      background: var(--green-pale);
+      border: 1px solid var(--green-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .diff-icon.navy {
+      background: var(--navy-pale);
+      border-color: var(--navy-tint);
+    }
+
+    .diff-icon.spice {
+      background: var(--spice-pale);
+      border-color: var(--spice-tint);
+    }
+
+    .diff-content h4 {
+      color: var(--ink);
+      margin-bottom: .3rem;
+    }
+
+    .diff-content p {
+      font-size: .83rem;
+    }
+
+    /* Stats mini */
+    .stats-mini {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .stat-mini {
+      background: var(--white);
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      transition: background var(--t-fast);
+    }
+
+    .stat-mini:hover {
+      background: var(--bg-soft);
+    }
+
+    .stat-mini .num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+
+    .stat-mini .lbl {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Glotrex International<span class="dot">.</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="payment.html">Trade Terms</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <select id="langSelect" class="lang-select" title="Language">
+            <option value="en">🌐 EN</option>
+            <option value="hi">🇮🇳 हिंदी</option>
+            <option value="mr">🇮🇳 मराठी</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="ar">🇦🇪 عربي</option>
+            <option value="ru">🇷🇺 RU</option>
+          </select>
+          <a href="index.html#contact" class="btn btn-green">Get Quote</a>
+        </div>
+        <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <nav class="mobile-nav">
+    <button class="mobile-nav-close">✕</button>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="services.html">Services</a>
+    <a href="payment.html">Trade Terms</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="sticky-ctas">
+    <button class="sticky-call" onclick="window.open('#','_self')">
+      <span class="call-icon">📅</span>
+      <span class="call-text">Schedule a 30-Min Strategy Call with our Expert Manager</span>
+    </button>
+    <a class="sticky-wa" href="https://wa.me/918237840136" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="about-hero hero">
+    <div class="hero-bg">
+      <img src="assets/img/about.jpeg"Supply Chain Operations"
+        width="1400" height="900" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content" style="padding-top:96px">
+      <div style="max-width:620px">
+        <span class="eyebrow white reveal">Our Identity</span>
+        <h1 class="anim-heading reveal reveal-delay-1" style="color:var(--white)">Engineering<br><em
+            style="color:#7FD4A2">Reliability</em><br>in Global Trade.</h1>
+        <div class="divider divider-white reveal reveal-delay-2"
+          style="background:rgba(255,255,255,.35);margin-top:1rem"></div>
+        <p class="reveal reveal-delay-3"
+          style="font-size:.95rem;color:rgba(255,255,255,.72);max-width:440px;line-height:1.82">Based in India.
+          Delivering to the World. Led by experts present on the ground — never behind a desk.</p>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ IDENTITY ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="identity-grid">
+        <div class="reveal from-left">
+          <span class="eyebrow">Who We Are</span>
+          <h2 class="anim-heading">The Glotrex Identity</h2>
+          <div class="divider"></div>
+          <p style="margin-bottom:.9rem">Based in India, Glotrex International is a premier Exporter and Supply Chain
+            Specialist led by expert trade managers. We are not mere intermediaries — we are strategic partners bridging
+            India's vast production capabilities with global industrial requirements.</p>
+          <p style="margin-bottom:1.75rem">Our focus: precision sourcing of Dehydrated Agro-products, Premium Spices,
+            and High-Performance Industrial Textiles — ensuring every shipment complies with international quality
+            benchmarks from Germany, USA, Dubai, Russia, and beyond.</p>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+            <a href="products.html" class="btn btn-green btn-arrow">View Our Products</a>
+            <a href="faq.html" class="btn btn-ghost">Read FAQ</a>
+          </div>
+        </div>
+
+        <div class="reveal from-right">
+          <div class="expert-card">
+            <img src="assets/img/prem.jpeg" alt="Mr. Premsagar Mehetre" style="width:90px;height:90px;border-radius:50%;object-fit:cover;"/>
+            <h3>Mr. Premsagar Mehetre</h3>
+            <div class="expert-role">Expert Export Manager · Glotrex International</div>
+            <blockquote>
+              "Global trade is built on the foundation of fulfilled promises. My mission is to deliver the absolute
+              purity of Indian produce to every corner of the world — from Germany and the USA to Dubai, Russia, and
+              beyond.
+              <br><br>
+              At Glotrex, we don't believe in 'desk trading.' My team and I are personally committed to being your eyes
+              and ears on the ground in India. When you trust Glotrex, you choose a partner who values your technical
+              specifications as much as their own."
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CORE DNA ═══ -->
+  <section class="section bg-green-pale b-top b-bottom">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Our Principles</span>
+        <h2 class="anim-heading">Core DNA &amp; Execution Ethics</h2>
+        <div class="divider center"></div>
+      </div>
+      <div class="dna-grid">
+        <div class="dna-card reveal reveal-delay-1">
+          <div class="dna-num">01</div>
+          <h4>Physical Guardianship</h4>
+          <p>We maintain physical presence at manufacturing and processing clusters during every stage — from grading to
+            final container stuffing. No desk trading, ever.</p>
+        </div>
+        <div class="dna-card reveal reveal-delay-2">
+          <div class="dna-num">02</div>
+          <h4>No Re-Export Guarantee</h4>
+          <p>100% Indian Origin, guaranteed. We have a strict policy against mixing or re-routing products from other
+            origins — total purity, complete traceability.</p>
+        </div>
+        <div class="dna-card reveal reveal-delay-3">
+          <div class="dna-num">03</div>
+          <h4>Tailored Compliance</h4>
+          <p>We analyze your country's specific regulations — EU microbial limits, US FDA norms, GCC food safety —
+            ensuring zero-error documentation and quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHILOSOPHY ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">The Glotrex Approach</span>
+        <h2 class="anim-heading">Listen. Understand. Execute.</h2>
+        <div class="divider center"></div>
+      </div>
+      <div class="philosophy-grid reveal">
+        <div class="philosophy-step">
+          <div class="phi-num">1</div>
+          <div class="phi-label">Listen</div>
+          <p>We conduct a detailed audit of your technical requirements — mesh size, moisture content, curcumin levels,
+            or fabric GSM. Your specifications become our blueprint.</p>
+        </div>
+        <div class="philosophy-step">
+          <div class="phi-num">2</div>
+          <div class="phi-label">Understand</div>
+          <p>We study the local compliance needs of your destination port — Dubai, Hamburg, New York. We know what
+            customs inspectors check for, and we prepare accordingly.</p>
+        </div>
+        <div class="philosophy-step">
+          <div class="phi-num">3</div>
+          <div class="phi-label">Execute</div>
+          <p>We deliver lab-validated quality with commitment to Zero Delays and Zero-Error Documentation — from NABL
+            lab reports to Phytosanitary and COO certificates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY DIFFERENT ═══ -->
+  <section class="section bg-soft b-top">
+    <div class="container">
+      <div class="grid-2" style="gap:4rem;align-items:center">
+
+        <div class="reveal from-left">
+          <span class="eyebrow">The Buyer's Benefit</span>
+          <h2 class="anim-heading">Why We Are Different?</h2>
+          <div class="divider"></div>
+          <div class="diff-row">
+            <div class="diff-icon">⚡</div>
+            <div class="diff-content">
+              <h4>Hyper-Responsiveness</h4>
+              <p>2-hour response guarantee. Dedicated trade experts available in your timezone — USA, Europe, Gulf, or
+                SE Asia.</p>
+            </div>
+          </div>
+          <div class="diff-row">
+            <div class="diff-icon navy">🔬</div>
+            <div class="diff-content">
+              <h4>Physical Audits &amp; Lab Certification</h4>
+              <p>All required certifications, including ISO and FSSAI, can be provided as per buyer requirements."</p>
+            </div>
+          </div>
+          <div class="diff-row">
+            <div class="diff-icon">🤝</div>
+            <div class="diff-content">
+              <h4>Long-term Partnerships</h4>
+              <p>We aim to be your permanent Indian sourcing arm — repeat excellence, not one-off transactions.</p>
+            </div>
+          </div>
+          <div class="diff-row">
+            <div class="diff-icon spice">👁️</div>
+            <div class="diff-content">
+              <h4>Pre-Shipment Inspection Welcome</h4>
+              <p>You or your nominated agency (SGS, Bureau Veritas, etc.) may conduct pre-shipment inspection at the
+                loading site. Transparency is our default.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal from-right">
+          <div class="stats-mini">
+            <div class="stat-item">
+              <div class="stat-num"><span data-target="100" data-suffix="%">0%</span></div>
+              <div class="stat-label">Physical Supervision</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num"><span data-target="25" data-suffix="+">0+</span></div>
+              <div class="stat-label">Countries Service Available</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num"><span data-target="2" data-suffix="hr">0hr</span></div>
+              <div class="stat-label">Response Guarantee</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num"><span data-target="100" data-suffix="%">0%</span></div>
+              <div class="stat-label">Indian Origin</div>
+            </div>
+          </div>
+          <div
+            style="margin-top:1.5rem;text-align:center;padding:1.75rem;background:var(--green-pale);border:1px solid var(--green-tint);border-radius:var(--r-lg)">
+            <p
+              style="font-family:var(--font-display);font-size:1.22rem;font-style:italic;color:var(--ink-mid);line-height:1.65">
+              "Born in India,<br>Built for the World."</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,.55)">Ready to Experience Precision Sourcing?</span>
+        <h2 class="anim-heading" style="color:var(--white)">Start Your Journey with Glotrex</h2>
+        <div class="divider center" style="background:rgba(255,255,255,.35)"></div>
+        <p>Schedule a 30-minute strategy call with our Expert Export Manager — absolutely free. We'll audit your
+          requirements and propose the best sourcing solution.</p>
+        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+          <a href="#" class="btn btn-outline-white" style="padding:.88rem 2rem">📅 Schedule a 30-Min Strategy Call</a>
+          <a href="https://wa.me/918237840136" target="_blank" class="btn"
+            style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.35)">💬 Inquire via
+            WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="color:#fff">Glotrex<span class="dot" style="color:#5DB87A">.</span></div>
+          <p>Engineering reliability in global trade. India's premier exporter of dehydrated agro-products, premium
+            spices &amp; industrial textiles.</p>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <a href="https://wa.me/918237840136" target="_blank" class="btn btn-green"
+              style="font-size:.73rem;padding:.55rem 1.1rem">💬 WhatsApp</a>
+            <a href="mailto:info@glotrexinternational.com" class="btn"
+              style="font-size:.73rem;padding:.55rem 1.1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.12)">✉
+              Email</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Products</h5>
+          <ul>
+            <li><a href="products.html#agriculture">Dehydrated Onion</a></li>
+            <li><a href="products.html#agriculture">Dehydrated Garlic</a></li>
+            <li><a href="products.html#spices">Turmeric &amp; Spices</a></li>
+            <li><a href="products.html#textile">Uniforms &amp; Textiles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Inquiry</h5>
+          <form class="footer-inquiry-form" id="footerInquiryForm">
+            <input type="text" name="name" placeholder="Your Name *" required />
+            <input type="text" name="company" placeholder="Company Name" />
+            <input type="text" name="country" placeholder="Country *" required />
+            <select name="product">
+              <option value="">Interested Product</option>
+              <option>Dehydrated Onion</option>
+              <option>Dehydrated Garlic</option>
+              <option>Turmeric / Spices</option>
+              <option>Uniforms / Textiles</option>
+            </select>
+            <textarea name="message" placeholder="Your requirements"></textarea>
+            <button type="submit" class="btn btn-green" style="width:100%;justify-content:center">Send via WhatsApp
+              →</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Glotrex International. All rights reserved.</span>
+        <span>Made in India 🇮🇳 · Exporting to the World 🌍</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

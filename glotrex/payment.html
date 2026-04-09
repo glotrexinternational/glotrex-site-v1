@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Terms & Incoterms — Glotrex International</title>
+  <meta name="description" content="Glotrex International's trade operations — Incoterms (FOB, CFR, CIF), secure payment protocols (LC, TT), global export reach, and zero-error documentation."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
+  <style>
+  /* ══════════════════════════════════════════════════
+     PAGE-SPECIFIC — Payment Terms & Incoterms
+  ══════════════════════════════════════════════════ */
+
+  /* ── Hero ── */
+  .pay-hero {
+    padding:148px 0 80px;
+    background:linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 65%, var(--navy-mid) 100%);
+    position:relative; overflow:hidden;
+  }
+  .pay-hero::before {
+    content:''; position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0l28-28v2L54 40h-2zm4 0l24-24v2L58 40h-2zm4 0l20-20v2L62 40h-2zm4 0l16-16v2L66 40h-2zm4 0l12-12v2L70 40h-2zm4 0l8-8v2L74 40h-2zm4 0l4-4v2l-2 2h-2z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .pay-hero-inner { position:relative; z-index:1; }
+  .pay-hero h1 { color:var(--white); margin-bottom:1rem; }
+  .pay-hero > .container p { color:rgba(255,255,255,.72); max-width:530px; font-size:.95rem; line-height:1.82; margin-bottom:2rem; }
+
+  /* Hero trust strip */
+  .hero-trust {
+    display:flex; gap:1.8rem; flex-wrap:wrap; margin-top:2rem;
+    padding-top:1.75rem; border-top:1px solid rgba(255,255,255,.12);
+  }
+  .trust-pill {
+    display:flex; align-items:center; gap:.5rem;
+    font-size:.76rem; font-weight:600; color:rgba(255,255,255,.75);
+  }
+  .trust-pill .dot-navy { width:7px; height:7px; border-radius:50%; background:var(--navy-tint); flex-shrink:0; }
+
+  /* ── Incoterms cards ── */
+  .inco-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+  }
+  @media(max-width:900px){ .inco-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:540px){ .inco-grid{grid-template-columns:1fr;} }
+
+  .inco-card {
+    border-radius:var(--r-xl); overflow:hidden;
+    border:1px solid var(--border);
+    background:var(--white);
+    transition:transform var(--t-mid) var(--ease), box-shadow var(--t-mid), border-color var(--t-mid);
+  }
+  .inco-card:hover { transform:translateY(-5px); box-shadow:var(--sh-lg); }
+
+  .inco-header {
+    padding:1.4rem 1.6rem 1.2rem;
+    display:flex; align-items:flex-start; gap:1rem;
+  }
+  .inco-badge {
+    font-family:var(--font-display); font-size:1.55rem; font-weight:700;
+    line-height:1; flex-shrink:0; min-width:60px;
+  }
+  .inco-card.fob  { border-top:3px solid var(--green); }
+  .inco-card.cfr  { border-top:3px solid var(--navy); }
+  .inco-card.cif  { border-top:3px solid var(--spice); }
+  .inco-card.fob  .inco-badge { color:var(--green); }
+  .inco-card.cfr  .inco-badge { color:var(--navy); }
+  .inco-card.cif  .inco-badge { color:var(--spice); }
+  .inco-card.fob:hover { border-color:var(--green-tint); }
+  .inco-card.cfr:hover { border-color:var(--navy-tint); }
+  .inco-card.cif:hover { border-color:var(--spice-tint); }
+
+  .inco-full { font-size:.73rem; font-weight:700; letter-spacing:.04em; color:var(--ink-soft); line-height:1.3; }
+  .inco-body { padding:0 1.6rem 1.5rem; }
+  .inco-body p { font-size:.83rem; line-height:1.76; margin-bottom:.9rem; }
+  .inco-body hr { border:none; border-top:1px solid var(--border); margin-bottom:.9rem; }
+
+  .responsibility-row {
+    display:flex; gap:.5rem; flex-direction:column;
+  }
+  .resp-item {
+    display:flex; align-items:center; gap:.6rem;
+    font-size:.75rem; color:var(--ink-soft);
+  }
+  .resp-dot {
+    width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  }
+  .resp-dot.yes { background:var(--green); }
+  .resp-dot.no  { background:var(--border-mid); }
+
+  .inco-tag {
+    display:inline-flex; align-items:center; gap:.3rem;
+    font-size:.65rem; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; padding:.22rem .55rem; border-radius:3px;
+  }
+  .tag-green { background:var(--green-pale); color:var(--green); }
+  .tag-navy  { background:var(--navy-pale);  color:var(--navy); }
+  .tag-spice { background:var(--spice-pale); color:var(--spice); }
+
+  /* ── Flexibility note ── */
+  .flex-note {
+    background:var(--bg-soft); border:1px solid var(--border);
+    border-left:4px solid var(--green); border-radius:0 var(--r-lg) var(--r-lg) 0;
+    padding:1.25rem 1.5rem; margin-top:1.75rem; display:flex; gap:.9rem; align-items:flex-start;
+  }
+  .flex-note .icon { font-size:1.4rem; flex-shrink:0; line-height:1; }
+  .flex-note p { font-size:.85rem; color:var(--ink-mid); line-height:1.75; margin:0; }
+  .flex-note p strong { color:var(--ink); }
+
+  /* ── Payment method cards ── */
+  .pay-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:1.75rem;
+  }
+  @media(max-width:640px){ .pay-grid{grid-template-columns:1fr;} }
+
+  .pay-card {
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-xl); overflow:hidden;
+    transition:transform var(--t-mid) var(--ease), box-shadow var(--t-mid), border-color var(--t-mid);
+  }
+  .pay-card:hover { transform:translateY(-4px); box-shadow:var(--sh); }
+  .pay-card.lc  { border-top:3px solid var(--green); }
+  .pay-card.tt  { border-top:3px solid var(--navy); }
+  .pay-card.lc:hover { border-color:var(--green-tint); }
+  .pay-card.tt:hover { border-color:var(--navy-tint); }
+
+  .pay-card-head {
+    padding:1.5rem 1.75rem 1rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .pay-card-icon {
+    width:52px; height:52px; border-radius:var(--r);
+    display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0;
+  }
+  .pay-card.lc .pay-card-icon { background:var(--green-pale); }
+  .pay-card.tt .pay-card-icon { background:var(--navy-pale); }
+  .pay-card-head h3 { font-size:1.1rem; color:var(--ink); margin-bottom:.15rem; }
+  .pay-card-head .subtitle { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+  .pay-card.lc .subtitle { color:var(--green); }
+  .pay-card.tt .subtitle { color:var(--navy); }
+
+  .pay-card-body { padding:0 1.75rem 1.75rem; }
+  .pay-card-body p { font-size:.83rem; line-height:1.78; margin-bottom:1rem; }
+  .pay-steps { display:flex; flex-direction:column; gap:.55rem; }
+  .pay-step {
+    display:flex; align-items:flex-start; gap:.7rem; font-size:.79rem; color:var(--ink-soft);
+  }
+  .step-num {
+    width:22px; height:22px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.65rem; font-weight:700;
+  }
+  .pay-card.lc .step-num { background:var(--green-pale); color:var(--green); }
+  .pay-card.tt .step-num { background:var(--navy-pale);  color:var(--navy); }
+
+  /* Glotrex promise box */
+  .promise-box {
+    background:var(--navy); border-radius:var(--r-xl);
+    padding:2.75rem 3rem; text-align:center; margin-top:2rem;
+    position:relative; overflow:hidden;
+  }
+  .promise-box::before {
+    content:''; position:absolute; top:-60px; right:-60px;
+    width:200px; height:200px; border-radius:50%;
+    background:rgba(255,255,255,.04);
+  }
+  .promise-box blockquote {
+    font-family:var(--font-display); font-size:1.25rem; font-style:italic;
+    color:rgba(255,255,255,.9); line-height:1.7; margin-bottom:.85rem;
+  }
+  .promise-box cite { font-size:.75rem; color:var(--navy-tint); font-style:normal; font-weight:600; letter-spacing:.08em; }
+
+  /* ── Region cards ── */
+  .region-grid {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem;
+  }
+  @media(max-width:600px){ .region-grid{grid-template-columns:1fr;} }
+
+  .region-card {
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-lg); padding:1.35rem 1.5rem;
+    display:flex; gap:1rem; align-items:flex-start;
+    transition:transform var(--t-mid) var(--ease), border-color var(--t-mid);
+  }
+  .region-card:hover { transform:translateY(-3px); border-color:var(--green-tint); }
+  .region-flag { font-size:2rem; line-height:1; flex-shrink:0; }
+  .region-card h4 { color:var(--ink); margin-bottom:.3rem; font-size:.92rem; }
+  .region-card p  { font-size:.78rem; line-height:1.65; }
+
+  /* Ports row */
+  .ports-row {
+    display:flex; gap:1.25rem; flex-wrap:wrap; margin-top:1.5rem;
+  }
+  .port-card {
+    flex:1; min-width:220px; background:var(--white);
+    border:1px solid var(--border); border-radius:var(--r-lg);
+    padding:1.35rem 1.5rem;
+    transition:transform var(--t-mid) var(--ease), border-color var(--t-mid);
+  }
+  .port-card:hover { transform:translateY(-3px); border-color:var(--green-tint); }
+  .port-icon { font-size:1.8rem; margin-bottom:.6rem; }
+  .port-card h4 { color:var(--ink); font-size:.88rem; margin-bottom:.25rem; }
+  .port-card p  { font-size:.76rem; }
+  .port-card .port-routes {
+    display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.75rem;
+  }
+  .port-route {
+    font-size:.62rem; font-weight:700; letter-spacing:.04em;
+    color:var(--green); background:var(--green-pale); border:1px solid var(--green-tint);
+    padding:.16rem .45rem; border-radius:3px;
+  }
+
+  /* ── Docs list (payment page version) ── */
+  .doc-list {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem;
+  }
+  @media(max-width:540px){ .doc-list{grid-template-columns:1fr;} }
+
+  .doc-list-item {
+    display:flex; align-items:center; gap:.75rem;
+    background:var(--bg-soft); border:1px solid var(--border);
+    border-radius:var(--r); padding:.85rem 1rem;
+    font-size:.82rem; font-weight:600; color:var(--ink-mid);
+    transition:border-color var(--t-fast), background var(--t-fast);
+  }
+  .doc-list-item:hover { border-color:var(--green-tint); background:var(--green-pale); }
+  .doc-list-item .check {
+    width:22px; height:22px; border-radius:50%; flex-shrink:0;
+    background:var(--green); display:flex; align-items:center; justify-content:center;
+    font-size:.7rem; color:var(--white); font-weight:700;
+  }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Glotrex International<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="payment.html">Trade Terms</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <select id="langSelect" class="lang-select" title="Language">
+          <option value="en">🌐 EN</option>
+          <option value="hi">🇮🇳 हिंदी</option>
+          <option value="mr">🇮🇳 मराठी</option>
+          <option value="de">🇩🇪 DE</option>
+          <option value="ar">🇦🇪 عربي</option>
+          <option value="ru">🇷🇺 RU</option>
+          <option value="pt">🇧🇷 PT</option>
+          <option value="es">🇪🇸 ES</option>
+          <option value="it">🇮🇹 IT</option>
+        </select>
+        <a href="index.html#contact" class="btn btn-navy">Get Quote</a>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <button class="mobile-nav-close">✕</button>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="services.html">Services</a>
+  <a href="payment.html">Trade Terms</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+</nav>
+
+<!-- Sticky CTAs -->
+<div class="sticky-ctas">
+  <button class="sticky-call" onclick="window.open('#cta','_self')">
+    <span class="call-icon">📅</span>
+    <span class="call-text">Schedule a 30-Min Strategy Call with our Expert Manager</span>
+  </button>
+  <a class="sticky-wa" href="https://wa.me/918237840136" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="pay-hero">
+  <div class="container">
+    <div class="pay-hero-inner">
+      <span class="eyebrow white reveal">Trade Operations &amp; Financial Security</span>
+      <h1 class="anim-heading reveal reveal-delay-1">Payment Terms<br>&amp; Incoterms</h1>
+      <p class="reveal reveal-delay-2">Efficient logistics. Secure payment protocols. Seamless global delivery. At Glotrex International, we collaborate exclusively with Tier-1 shipping lines and established international banking channels to protect the interests of both parties.</p>
+      <div class="hero-btns reveal reveal-delay-3">
+        <a href="#incoterms" class="btn btn-outline-white">View Incoterms</a>
+        <a href="#payment" class="btn" style="background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.25)">View Payment Options</a>
+      </div>
+      <div class="hero-trust reveal reveal-delay-4">
+        <div class="trust-pill"><span class="dot-navy"></span>Tier-1 Shipping Lines Only</div>
+        <div class="trust-pill"><span class="dot-navy"></span>Bank-Guaranteed Payments</div>
+        <div class="trust-pill"><span class="dot-navy"></span>ICC Standard Incoterms</div>
+        <div class="trust-pill"><span class="dot-navy"></span>Zero-Error Documentation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     LOGISTICS & GLOBAL REACH
+═══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Efficient Logistics. Global Reach.</span>
+      <h2 class="anim-heading">Seamless Delivery<br>from India to the World</h2>
+      <div class="divider center"></div>
+      <p>We collaborate exclusively with Tier-1 shipping lines from India's premier ports, ensuring the highest safety, security, and transit speed for your cargo.</p>
+    </div>
+
+    <!-- Ports -->
+    <div class="ports-row reveal scale-in">
+      <div class="port-card">
+        <div class="port-icon">⚓</div>
+        <h4>Mundra Port, Gujarat</h4>
+        <p>India's largest private port. Excellent FCL/LCL connections to GCC, Europe, and East Africa.</p>
+        <div class="port-routes">
+          <span class="port-route">Dubai 3–5 Days</span>
+          <span class="port-route">Germany 16–19 Days</span>
+          <span class="port-route">USA 22–26 Days</span>
+          <p>*Note : Transit times are indicative and not Guaranteed.</p>
+        </div>
+      </div>
+      <div class="port-card">
+        <div class="port-icon">🚢</div>
+        <h4>JNPT — Nhava Sheva, Mumbai</h4>
+        <p>India's busiest container port. Fastest connections to Europe, the Americas, and Southeast Asia.</p>
+        <div class="port-routes">
+          <span class="port-route">UK 18–22 Days</span>
+          <span class="port-route">Netherlands 17–20 Days</span>
+          <span class="port-route">Malaysia 10–14 Days</span>
+          <p>*Note : Transit times are indicative and not Guaranteed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Regions -->
+    <div style="margin-top:2.5rem">
+      <h3 style="font-family:var(--font-display);font-size:1.35rem;margin-bottom:1.4rem;color:var(--ink)" class="reveal">Global Export Reach — Target Regions</h3>
+      <div class="region-grid">
+        <div class="region-card reveal reveal-delay-1">
+          <div class="region-flag">🇦🇪</div>
+          <div>
+            <h4>Middle East &amp; GCC</h4>
+            <p>Specialized logistics network with full Gulf Food Safety (ESMA/GSO) compliance. UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman.</p>
+          </div>
+        </div>
+        <div class="region-card reveal reveal-delay-2">
+          <div class="region-flag">🇪🇺</div>
+          <div>
+            <h4>Europe</h4>
+            <p>Strict adherence to EU microbial and pesticide standards. Germany, Italy, Netherlands, UK, France, Belgium, Poland.</p>
+          </div>
+        </div>
+        <div class="region-card reveal reveal-delay-3">
+          <div class="region-flag">🌎</div>
+          <div>
+            <h4>The Americas</h4>
+            <p>High-grade packaging and US FDA-compliant documentation for USA, Brazil, and Mexico import requirements.</p>
+          </div>
+        </div>
+        <div class="region-card reveal reveal-delay-4">
+          <div class="region-flag">🌏</div>
+          <div>
+            <h4>Neighboring Nations &amp; SE Asia</h4>
+            <p>Rapid surface and sea logistics for Nepal and Bangladesh. Established routes to Malaysia, Indonesia, and Singapore.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     INCOTERMS
+═══════════════════════════════════════════════════ -->
+<section class="section bg-soft b-top b-bottom" id="incoterms">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow navy">ICC Standard Incoterms</span>
+      <h2 class="anim-heading">Standardized Incoterms for<br>Seamless Global Delivery</h2>
+      <div class="divider center divider-navy" style="background:var(--navy)"></div>
+      <p>We primarily operate under the following International Chamber of Commerce (ICC) standards. Customized delivery terms can be discussed based on specific port and country requirements.</p>
+    </div>
+
+    <div class="inco-grid">
+
+      <!-- FOB -->
+      <div class="inco-card fob reveal reveal-delay-1">
+        <div class="inco-header">
+          <div>
+            <div class="inco-badge">FOB</div>
+          </div>
+          <div>
+            <div class="inco-full">Free On Board</div>
+            <span class="inco-tag tag-green">Most Common</span>
+          </div>
+        </div>
+        <div class="inco-body">
+          <p>We ensure secure delivery of your goods to the Indian port and handle all export customs clearance. Risk transfers to the buyer once goods are on board the vessel.</p>
+          <hr/>
+          <div class="responsibility-row">
+            <div class="resp-item"><span class="resp-dot yes"></span>Export customs &amp; documentation — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot yes"></span>Loading at Indian port — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Ocean freight — Buyer</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Insurance — Buyer</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Import customs — Buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CFR -->
+      <div class="inco-card cfr reveal reveal-delay-2">
+        <div class="inco-header">
+          <div>
+            <div class="inco-badge">CFR</div>
+          </div>
+          <div>
+            <div class="inco-full">Cost &amp; Freight</div>
+            <span class="inco-tag tag-navy">Popular for GCC</span>
+          </div>
+        </div>
+        <div class="inco-body">
+          <p>Includes ocean freight to your designated destination port. Glotrex covers cost and freight; cargo insurance is arranged by the buyer.</p>
+          <hr/>
+          <div class="responsibility-row">
+            <div class="resp-item"><span class="resp-dot yes"></span>Export customs &amp; documentation — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot yes"></span>Ocean freight to destination — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot yes"></span>Loading at Indian port — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Insurance — Buyer</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Import customs — Buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIF -->
+      <div class="inco-card cif reveal reveal-delay-3">
+        <div class="inco-header">
+          <div>
+            <div class="inco-badge">CIF</div>
+          </div>
+          <div>
+            <div class="inco-full">Cost, Insurance &amp; Freight</div>
+            <span class="inco-tag tag-spice">Full Coverage</span>
+          </div>
+        </div>
+        <div class="inco-body">
+          <p>Includes freight and comprehensive cargo insurance for 100% peace of mind. Glotrex handles everything up to the destination port of discharge.</p>
+          <hr/>
+          <div class="responsibility-row">
+            <div class="resp-item"><span class="resp-dot yes"></span>Export customs &amp; documentation — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot yes"></span>Ocean freight to destination — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot yes"></span>Cargo insurance — Glotrex</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Unloading at destination — Buyer</div>
+            <div class="resp-item"><span class="resp-dot no"></span>Import customs — Buyer</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex-note reveal">
+      <div class="icon">💡</div>
+      <p><strong>Flexibility Note:</strong> Specific Incoterms can be discussed and finalized based on the volume, frequency, and destination of the shipment. Our Expert Export Manager will recommend the most cost-effective and secure option for your trade lane.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     PAYMENT TERMS
+═══════════════════════════════════════════════════ -->
+<section class="section" id="payment">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Financial Security &amp; Trust</span>
+      <h2 class="anim-heading">Secure, Tailored &amp;<br>Transparent Payment Protocols</h2>
+      <div class="divider center"></div>
+      <p>To ensure the highest level of financial security, we utilize established international banking channels. We support bank-guaranteed payment methods to protect the interests of both parties.</p>
+    </div>
+
+    <div class="pay-grid">
+
+      <!-- LC -->
+      <div class="pay-card lc reveal reveal-delay-1">
+        <div class="pay-card-head">
+          <div class="pay-card-icon">🏦</div>
+          <div>
+            <div class="subtitle">Method 1 — Most Secure</div>
+            <h3>Confirmed Irrevocable<br>Letter of Credit (L/C) at Sight</h3>
+          </div>
+        </div>
+        <div class="pay-card-body">
+          <p>The most secure bank-guaranteed method recognized globally — providing full protection for both the buyer and the exporter. Accepted from all top-tier international banks.</p>
+          <div class="pay-steps">
+            <div class="pay-step">
+              <div class="step-num">1</div>
+              <span>Buyer's bank issues a Confirmed Irrevocable L/C to Glotrex's bank</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">2</div>
+              <span>Glotrex processes and ships the order as per LC terms</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">3</div>
+              <span>Shipping documents presented to bank; payment released at sight</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">4</div>
+              <span>Buyer receives documents to clear customs at destination port</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TT -->
+      <div class="pay-card tt reveal reveal-delay-2">
+        <div class="pay-card-head">
+          <div class="pay-card-icon">💸</div>
+          <div>
+            <div class="subtitle">Method 2 — Flexible</div>
+            <h3>Telegraphic Transfer (T/T)<br>Advance &amp; Against BL</h3>
+          </div>
+        </div>
+        <div class="pay-card-body">
+          <p>Secure wire transfer payment — advance deposit confirms the order; remaining balance paid against scanned shipping documents (BL Copy) before document release.</p>
+          <div class="pay-steps">
+            <div class="pay-step">
+              <div class="step-num">1</div>
+              <span>30% advance T/T payment to confirm order &amp; begin production</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">2</div>
+              <span>Glotrex completes production, QA, and port loading</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">3</div>
+              <span>Scanned BL copy shared; buyer remits remaining 70%</span>
+            </div>
+            <div class="pay-step">
+              <div class="step-num">4</div>
+              <span>Original documents couriered upon balance payment confirmation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Glotrex Promise -->
+    <div class="promise-box reveal">
+      <blockquote>"For every transaction, we work closely with our buyers to finalize a payment structure that ensures mutual security and fosters a long-term partnership."</blockquote>
+      <cite>— The Glotrex Promise · Final payment terms are strictly subject to mutual discussion at the time of order placement.</cite>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ZERO-ERROR DOCUMENTATION
+═══════════════════════════════════════════════════ -->
+<section class="section bg-soft b-top b-bottom">
+  <div class="container">
+    <div class="grid-2" style="gap:4.5rem;align-items:center">
+
+      <div class="reveal from-left">
+        <span class="eyebrow">100% Accurate Paperwork</span>
+        <h2 class="anim-heading">Guaranteed Smooth<br>Customs Clearance</h2>
+        <div class="divider"></div>
+        <p style="margin-bottom:1rem">Recognizing the critical importance of paperwork in international trade, we provide 100% accurate documentation for every shipment — covering every requirement at your destination port, whether Dubai, Hamburg, or New York.</p>
+        <p style="margin-bottom:1.75rem">Our Expert Export Manager personally reviews all documentation before dispatch. We have a zero-tolerance policy for errors that can cause customs delays or financial losses.</p>
+        <a href="services.html" class="btn btn-green btn-arrow">View Our Execution Process</a>
+      </div>
+
+      <div class="doc-list reveal from-right">
+        <div class="doc-list-item"><span class="check">✓</span>Phytosanitary Certificate</div>
+        <div class="doc-list-item"><span class="check">✓</span>Certificate of Origin (COO)</div>
+        <div class="doc-list-item"><span class="check">✓</span>NABL Lab Analysis Reports</div>
+        <div class="doc-list-item"><span class="check">✓</span>Health &amp; Inspection Certificates</div>
+        <div class="doc-list-item"><span class="check">✓</span>Bill of Lading (Clean BL)</div>
+        <div class="doc-list-item"><span class="check">✓</span>Commercial Invoice</div>
+        <div class="doc-list-item"><span class="check">✓</span>Export Packing List</div>
+        <div class="doc-list-item"><span class="check">✓</span>Insurance Certificate (on CIF)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════════ -->
+<section class="section" id="cta">
+  <div class="container">
+    <div class="cta-banner reveal" style="background:var(--navy)">
+      <span class="eyebrow" style="color:rgba(255,255,255,.45)">Discuss Your Requirements</span>
+      <h2 class="anim-heading" style="color:var(--white)">Discuss Your Trade &amp;<br>Payment Requirements</h2>
+      <div class="divider center" style="background:rgba(255,255,255,.28)"></div>
+      <p>Our Expert Export Manager will help you select the right Incoterm, payment structure, and documentation checklist based on your country's import requirements and your company's financial preferences.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn btn-outline-white" style="padding:.88rem 2.2rem">📅 Schedule a 30-Min Strategy Call</a>
+        <a href="https://wa.me/918237840136" target="_blank" class="btn" style="background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.25)">💬 Connect for an Instant Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:#fff">Glotrex<span class="dot" style="color:#5DB87A">.</span></div>
+        <p>Engineering reliability in global trade. India's premier exporter of dehydrated agro-products, premium spices &amp; industrial textiles.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <a href="https://wa.me/918237840136" target="_blank" class="btn btn-green" style="font-size:.73rem;padding:.55rem 1.1rem">💬 WhatsApp</a>
+          <a href="mailto:info@glotrexinternational.com" class="btn" style="font-size:.73rem;padding:.55rem 1.1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.12)">✉ Email</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Quick Links</h5><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="payment.html">Trade Terms</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Products</h5><ul>
+        <li><a href="products.html#agriculture">Dehydrated Onion</a></li>
+        <li><a href="products.html#agriculture">Dehydrated Garlic</a></li>
+        <li><a href="products.html#spices">Turmeric &amp; Spices</a></li>
+        <li><a href="products.html#textile">Uniforms &amp; Textiles</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Quick Inquiry</h5>
+        <form class="footer-inquiry-form" id="footerInquiryForm">
+          <input type="text" name="name" placeholder="Your Name *" required/>
+          <input type="text" name="company" placeholder="Company Name"/>
+          <input type="text" name="country" placeholder="Country *" required/>
+          <select name="product"><option value="">Interested Product</option><option>Dehydrated Onion</option><option>Dehydrated Garlic</option><option>Turmeric / Spices</option><option>Uniforms / Textiles</option></select>
+          <textarea name="message" placeholder="Your requirements"></textarea>
+          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center">Send via WhatsApp →</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Glotrex International. All rights reserved.</span>
+      <span>Made in India 🇮🇳 · Exporting to the World 🌍</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

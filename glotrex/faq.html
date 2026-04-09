@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Glotrex International</title>
+  <meta name="description"
+    content="Frequently asked questions about Glotrex International's quality, logistics, payment terms, and global export operations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── FAQ layout ─────────────────────────────────── */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media(max-width:900px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-sidebar {
+        position: static !important;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .4rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .faq-sidebar-title {
+        width: 100%;
+      }
+
+      .faq-nav-link {
+        border-left: none !important;
+        border: 1.5px solid var(--border);
+        border-radius: 20px;
+        padding: .35rem .85rem;
+        font-size: .75rem;
+      }
+
+      .faq-nav-link.active {
+        border-color: var(--green);
+        background: var(--green-pale);
+      }
+    }
+
+    .faq-sidebar {
+      position: sticky;
+      top: 88px;
+    }
+
+    .faq-sidebar-title {
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .75rem;
+    }
+
+    .faq-section {
+      scroll-margin-top: 100px;
+      margin-bottom: 3.5rem;
+    }
+
+    .faq-section-head {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: .9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-sec-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--r);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .faq-sec-icon.green {
+      background: var(--green-pale);
+    }
+
+    .faq-sec-icon.navy {
+      background: var(--navy-pale);
+    }
+
+    .faq-sec-icon.spice {
+      background: var(--spice-pale);
+    }
+
+    .faq-sec-icon.ink {
+      background: var(--bg-muted);
+    }
+
+    /* FAQ search bar */
+    .faq-search {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-search input {
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 30px;
+      padding: .72rem 1.1rem .72rem 2.8rem;
+      font-family: var(--font-body);
+      font-size: .85rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    }
+
+    .faq-search input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px var(--green-pale);
+    }
+
+    .faq-search input::placeholder {
+      color: var(--ink-faint);
+    }
+
+    .faq-search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-faint);
+      font-size: .9rem;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Glotrex International<span class="dot">.</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="payment.html">Trade Terms</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <select id="langSelect" class="lang-select" title="Language">
+            <option value="en">🌐 EN</option>
+            <option value="hi">🇮🇳 हिंदी</option>
+            <option value="mr">🇮🇳 मराठी</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="ar">🇦🇪 عربي</option>
+            <option value="ru">🇷🇺 RU</option>
+          </select>
+          <a href="index.html#contact" class="btn btn-green">Get Quote</a>
+        </div>
+        <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <nav class="mobile-nav">
+    <button class="mobile-nav-close">✕</button>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="services.html">Services</a>
+    <a href="payment.html">Trade Terms</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="sticky-ctas">
+    <button class="sticky-call" onclick="window.open('#','_self')">
+      <span class="call-icon">📅</span>
+      <span class="call-text">Schedule a 30-Min Strategy Call with our Expert Manager</span>
+    </button>
+    <a class="sticky-wa" href="https://wa.me/918237840136" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h1 class="anim-heading">Have Questions?<br>We Have Answers.</h1>
+      <div class="divider"></div>
+      <p>Everything you need to know about Glotrex International's quality standards, logistics, payment terms, and
+        global trade operations.</p>
+    </div>
+  </div>
+
+  <!-- FAQ Body -->
+  <section class="section">
+    <div class="container">
+      <div class="faq-layout">
+
+        <!-- Sidebar nav -->
+        <aside class="faq-sidebar">
+          <div class="faq-sidebar-title">Sections</div>
+          <a class="faq-nav-link active" onclick="scrollTo('faq-quality')">🔬 Quality &amp; Sourcing</a>
+          <a class="faq-nav-link" onclick="scrollTo('faq-logistics')">🚢 Logistics &amp; Trade</a>
+          <a class="faq-nav-link" onclick="scrollTo('faq-payment')">💳 Payment &amp; Finance</a>
+          <a class="faq-nav-link" onclick="scrollTo('faq-support')">📞 Communication</a>
+        </aside>
+
+        <!-- Main FAQ content -->
+        <div>
+
+          <!-- Search -->
+          <div class="faq-search reveal">
+            <span class="faq-search-icon">🔍</span>
+            <input type="text" id="faqSearch" placeholder="Search frequently asked questions…" autocomplete="off" />
+          </div>
+
+          <!-- Section 1: Quality -->
+          <div class="faq-section reveal" id="faq-quality">
+            <div class="faq-section-head">
+              <div class="faq-sec-icon green">🔬</div>
+              <div>
+                <span class="eyebrow" style="margin-bottom:.15rem">Section 1</span>
+                <h3>Quality &amp; Sourcing Assurance</h3>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                How does Glotrex International guarantee the quality of dehydrated products and spices?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>We eliminate the "Desk Trading" risk entirely. Our Expert Export Manager and ground team are
+                  physically present at processing units during production and loading. We provide NABL-accredited lab
+                  reports (SGS / Intertek / TUV) for every batch, covering microbial limits, moisture content, and
+                  pesticide residues — documentation provided before the shipment leaves India.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Are your products 100% of Indian origin?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>Yes — unconditionally. We have a strict "No Re-Export" policy. Every gram of onion powder, garlic
+                  flakes, turmeric, or spice we export is grown and processed in India's premier agricultural hubs
+                  (Nashik, Rajasthan, Guntur, Sangli, etc.), ensuring 100% purity and traceability. We provide
+                  Certificate of Origin (COO) and Phytosanitary certificates with every shipment.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Can you meet specific microbial standards for the European or US markets?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>Absolutely. We understand the stringent regulations of the EU and US FDA. We customize the processing
+                  (Steam Sterilization / E-beam irradiation) to meet your specific technical data sheets for Salmonella,
+                  E. Coli, and Yeast/Mould counts. Before any shipment, we share NABL-accredited lab reports from SGS,
+                  Intertek, or TUV SUD confirming compliance.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Logistics -->
+          <div class="faq-section reveal" id="faq-logistics">
+            <div class="faq-section-head">
+              <div class="faq-sec-icon navy">🚢</div>
+              <div>
+                <span class="eyebrow navy" style="margin-bottom:.15rem">Section 2</span>
+                <h3>Logistics &amp; Trade Operations</h3>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Which ports do you primarily use for shipping?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>We primarily export from <strong>Mundra Port</strong> (Gujarat) and <strong>JNPT (Nhava Sheva,
+                    Mumbai)</strong> — India's two most efficient and well-connected gateways for global trade. These
+                  ports provide faster transit times to the Gulf (3–5 days), Europe (15–20 days), and the Americas
+                  (20–25 days), with excellent FCL and LCL options.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Do you provide private labeling or customized packaging?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>Yes. We offer full customized packaging solutions including 20kg / 25kg Kraft paper bags, HDPE woven
+                  bags, and vacuum-sealed inner liners. We also offer branded retail-ready packaging with your brand
+                  name and logo. Minimum order quantities apply for branded packaging.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                What is your typical lead time from order to shipment?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>For standard products, our lead time is 7 to 14 business days from the date of order confirmation and
+                  payment instrument receipt (LC / advance TT). Lead time varies based on volume, customization, and
+                  seasonal availability. Rush orders can be discussed with our Export Manager case-by-case.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Payment -->
+          <div class="faq-section reveal" id="faq-payment">
+            <div class="faq-section-head">
+              <div class="faq-sec-icon spice">💳</div>
+              <div>
+                <span class="eyebrow spice" style="margin-bottom:.15rem">Section 3</span>
+                <h3>Payment &amp; Financial Trust</h3>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Are your payment terms negotiable?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>Yes. At Glotrex, we believe in building long-term partnerships. While our standard protocols involve
+                  Confirmed Irrevocable L/C at Sight or T/T (30% Advance + 70% against BL Scan), we are open to
+                  discussing flexible payment structures based on order volume, frequency, and mutual trust developed
+                  over time.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Do you accept Letter of Credit (LC) from all global banks?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>We accept LCs from top-tier international banks including HSBC, Citibank, Standard Chartered,
+                  Deutsche Bank, Emirates NBD, and other globally reputed institutions. For specific regional banks, our
+                  finance team performs a standard audit to ensure a smooth and secure transaction. This typically takes
+                  1–2 business days.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Communication -->
+          <div class="faq-section reveal" id="faq-support">
+            <div class="faq-section-head">
+              <div class="faq-sec-icon ink">📞</div>
+              <div>
+                <span class="eyebrow" style="margin-bottom:.15rem">Section 4</span>
+                <h3>Communication &amp; Support</h3>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                How do you handle time-zone differences for international buyers?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>We are a global-first company. Every buyer is assigned a dedicated Expert Export Manager available
+                  according to your local business hours — USA (EST/PST), Europe (CET), Gulf (GST), or SE Asia. We
+                  guarantee a response within 2 hours during your business day. WhatsApp is always available for urgent
+                  communications.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                Can I schedule a physical inspection before the final shipment?
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>We actively encourage it. You or your nominated third-party inspection agency (SGS, Bureau Veritas,
+                  Intertek, or any other) are welcome to conduct a pre-shipment inspection at the loading site or
+                  processing unit. We don't restrict access — our ground presence means your inspector works alongside
+                  our team.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="faq-cta reveal">
+            <span class="eyebrow">Still Have Questions?</span>
+            <h3 class="anim-heading" style="margin-bottom:.55rem">Speak With Our Expert Manager</h3>
+            <div class="divider center"></div>
+            <p style="margin-bottom:1.75rem">Dedicated Export Managers are available in your timezone. Get a direct,
+              personalised answer to your sourcing requirements.</p>
+            <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+              <a href="#" class="btn btn-green" style="padding:.88rem 2rem">📅 Schedule a 30-Min Strategy Call</a>
+              <a href="https://wa.me/918237840136" target="_blank" class="btn btn-outline-green">💬 Connect on
+                WhatsApp</a>
+            </div>
+          </div>
+
+        </div><!-- /main -->
+      </div><!-- /layout -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="color:#fff">Glotrex<span class="dot" style="color:#5DB87A">.</span></div>
+          <p>Engineering reliability in global trade. India's premier exporter of dehydrated agro-products, premium
+            spices &amp; industrial textiles.</p>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <a href="https://wa.me/918237840136" target="_blank" class="btn btn-green"
+              style="font-size:.73rem;padding:.55rem 1.1rem">💬 WhatsApp</a>
+            <a href="mailto:info@glotrexinternational.com" class="btn"
+              style="font-size:.73rem;padding:.55rem 1.1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.12)">✉
+              Email</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Products</h5>
+          <ul>
+            <li><a href="products.html#agriculture">Dehydrated Onion</a></li>
+            <li><a href="products.html#agriculture">Dehydrated Garlic</a></li>
+            <li><a href="products.html#spices">Turmeric &amp; Spices</a></li>
+            <li><a href="products.html#textile">Uniforms &amp; Textiles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Inquiry</h5>
+          <form class="footer-inquiry-form" id="footerInquiryForm">
+            <input type="text" name="name" placeholder="Your Name *" required />
+            <input type="text" name="company" placeholder="Company Name" />
+            <input type="text" name="country" placeholder="Country *" required />
+            <select name="product">
+              <option value="">Interested Product</option>
+              <option>Dehydrated Onion</option>
+              <option>Dehydrated Garlic</option>
+              <option>Turmeric / Spices</option>
+              <option>Uniforms / Textiles</option>
+            </select>
+            <textarea name="message" placeholder="Your requirements"></textarea>
+            <button type="submit" class="btn btn-green" style="width:100%;justify-content:center">Send via WhatsApp
+              →</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Glotrex International. All rights reserved.</span>
+        <span>Made in India 🇮🇳 · Exporting to the World 🌍</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    /* ── Sidebar section scroll ── */
+    function scrollTo(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActive(id);
+    }
+    function setActive(id) {
+      document.querySelectorAll('.faq-nav-link').forEach(l => l.classList.remove('active'));
+      const map = { 'faq-quality': 0, 'faq-logistics': 1, 'faq-payment': 2, 'faq-support': 3 };
+      const links = document.querySelectorAll('.faq-nav-link');
+      if (links[map[id]]) links[map[id]].classList.add('active');
+    }
+
+    /* ── Scroll spy ── */
+    const sections = ['faq-quality', 'faq-logistics', 'faq-payment', 'faq-support'];
+    window.addEventListener('scroll', () => {
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.top <= 130 && r.bottom > 130) { setActive(id); break; }
+      }
+    }, { passive: true });
+
+    /* ── Live FAQ search ── */
+    document.getElementById('faqSearch')?.addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      document.querySelectorAll('.accordion-item').forEach(item => {
+        item.style.display = q && !item.textContent.toLowerCase().includes(q) ? 'none' : '';
+      });
+      sections.forEach(id => {
+        const sec = document.getElementById(id);
+        if (!sec) return;
+        const visible = [...sec.querySelectorAll('.accordion-item')].some(i => i.style.display !== 'none');
+        sec.style.display = q && !visible ? 'none' : '';
+      });
+    });
+  </script>
+</body>
+
+</html>

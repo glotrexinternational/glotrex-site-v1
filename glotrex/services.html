@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services & Execution Process — Glotrex International</title>
+  <meta name="description" content="Glotrex International's end-to-end export execution process — from requirement audit to port loading. Transparent, systematic, ground-zero supervised."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
+  <style>
+  /* ══════════════════════════════════════════════════
+     PAGE-SPECIFIC — Services & Execution
+  ══════════════════════════════════════════════════ */
+
+  /* ── Hero ── */
+  .svc-hero {
+    padding:148px 0 80px;
+    background:linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+    position:relative; overflow:hidden;
+  }
+  .svc-hero::before {
+    content:''; position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .svc-hero-content { position:relative; z-index:1; max-width:680px; }
+  .svc-hero h1 { color:var(--white); margin-bottom:1rem; }
+  .svc-hero > .container > div > p { color:rgba(255,255,255,.75); font-size:.97rem; line-height:1.82; margin-bottom:2rem; max-width:520px; }
+  .svc-hero .hero-meta {
+    display:flex; gap:2rem; flex-wrap:wrap; margin-top:2rem;
+    padding-top:2rem; border-top:1px solid rgba(255,255,255,.15);
+  }
+  .hero-meta-item { display:flex; align-items:center; gap:.6rem; }
+  .hero-meta-item .icon-box {
+    width:36px; height:36px; border-radius:var(--r-sm);
+    background:rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+  .hero-meta-item span { font-size:.78rem; font-weight:600; color:rgba(255,255,255,.8); }
+
+  /* ── Timeline ── */
+  .timeline-section { padding:100px 0; background:var(--bg); }
+
+  .timeline-wrap { position:relative; max-width:900px; margin:0 auto; }
+
+  /* Vertical line */
+  .timeline-wrap::before {
+    content:''; position:absolute;
+    left:50%; top:0; bottom:0; width:2px;
+    background:var(--border); transform:translateX(-50%);
+    z-index:0;
+  }
+  /* Animated progress fill */
+  .timeline-line-fill {
+    position:absolute; left:50%; top:0;
+    width:2px; background:var(--green);
+    transform:translateX(-50%); z-index:1;
+    height:0; transition:height 0.1s linear;
+  }
+
+  .timeline-step {
+    display:grid; grid-template-columns:1fr 64px 1fr;
+    align-items:start; margin-bottom:3.5rem; position:relative; z-index:2;
+  }
+  .timeline-step:last-child { margin-bottom:0; }
+
+  /* Card — alternates sides */
+  .timeline-card {
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-xl); padding:1.75rem 1.85rem;
+    box-shadow:var(--sh-sm);
+    transition:transform var(--t-mid) var(--ease), box-shadow var(--t-mid), border-color var(--t-mid);
+  }
+  .timeline-card:hover { transform:translateY(-4px); box-shadow:var(--sh); border-color:var(--green-tint); }
+
+  .timeline-step:nth-child(odd)  .timeline-card { grid-column:1; grid-row:1; }
+  .timeline-step:nth-child(odd)  .timeline-node { grid-column:2; grid-row:1; }
+  .timeline-step:nth-child(odd)  .timeline-blank{ grid-column:3; grid-row:1; }
+  .timeline-step:nth-child(even) .timeline-card { grid-column:3; grid-row:1; }
+  .timeline-step:nth-child(even) .timeline-node { grid-column:2; grid-row:1; }
+  .timeline-step:nth-child(even) .timeline-blank{ grid-column:1; grid-row:1; }
+
+  /* reveal from correct side */
+  .timeline-step:nth-child(odd)  .timeline-card { opacity:0; transform:translateX(-28px); transition:opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease), box-shadow var(--t-mid); }
+  .timeline-step:nth-child(even) .timeline-card { opacity:0; transform:translateX(28px);  transition:opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease), box-shadow var(--t-mid); }
+  .timeline-step.visible .timeline-card { opacity:1 !important; transform:translateX(0) !important; }
+  .timeline-step:nth-child(2).visible .timeline-card { transition-delay:.1s; }
+  .timeline-step:nth-child(3).visible .timeline-card { transition-delay:.08s; }
+  .timeline-step:nth-child(4).visible .timeline-card { transition-delay:.06s; }
+  .timeline-step:nth-child(5).visible .timeline-card { transition-delay:.04s; }
+
+  /* Node (circle with number) */
+  .timeline-node {
+    display:flex; flex-direction:column; align-items:center; gap:0; padding-top:.2rem;
+  }
+  .node-circle {
+    width:52px; height:52px; border-radius:50%;
+    background:var(--white); border:3px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:1.1rem; font-weight:700;
+    color:var(--ink-faint); position:relative; z-index:2;
+    transition:border-color var(--t-mid), background var(--t-mid), color var(--t-mid), box-shadow var(--t-mid);
+  }
+  .timeline-step.visible .node-circle {
+    border-color:var(--green); background:var(--green);
+    color:var(--white); box-shadow:0 0 0 6px var(--green-pale);
+  }
+
+  /* Card internals */
+  .phase-badge {
+    display:inline-flex; align-items:center; gap:.35rem;
+    font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--green); background:var(--green-pale);
+    border:1px solid var(--green-tint); border-radius:3px;
+    padding:.18rem .5rem; margin-bottom:.75rem;
+  }
+  .timeline-card h3 {
+    font-family:var(--font-display); font-size:1.25rem; font-weight:700;
+    color:var(--ink); margin-bottom:.55rem; line-height:1.25;
+  }
+  .timeline-card p { font-size:.83rem; line-height:1.78; margin-bottom:0; }
+
+  .card-details {
+    margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);
+    display:flex; flex-wrap:wrap; gap:.4rem;
+  }
+  .detail-chip {
+    font-size:.68rem; font-weight:600; color:var(--ink-soft);
+    background:var(--bg-soft); border:1px solid var(--border);
+    padding:.22rem .6rem; border-radius:3px;
+    display:flex; align-items:center; gap:.25rem;
+  }
+  .detail-chip::before { content:'✓'; color:var(--green); font-weight:700; }
+
+  /* Mobile timeline — single column */
+  @media(max-width:720px){
+    .timeline-wrap::before { left:26px; }
+    .timeline-line-fill    { left:26px; }
+    .timeline-step {
+      grid-template-columns:52px 1fr; column-gap:1.1rem;
+    }
+    .timeline-step:nth-child(odd)  .timeline-card,
+    .timeline-step:nth-child(even) .timeline-card { grid-column:2; grid-row:1; }
+    .timeline-step:nth-child(odd)  .timeline-node,
+    .timeline-step:nth-child(even) .timeline-node { grid-column:1; grid-row:1; }
+    .timeline-step:nth-child(odd)  .timeline-blank,
+    .timeline-step:nth-child(even) .timeline-blank { display:none; }
+    .timeline-step:nth-child(odd)  .timeline-card { transform:translateX(-16px); }
+    .timeline-step:nth-child(even) .timeline-card { transform:translateX(-16px); }
+  }
+
+  /* ── End-to-end intro grid ── */
+  .e2e-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;
+  }
+  @media(max-width:900px){ .e2e-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:540px){ .e2e-grid{ grid-template-columns:1fr; } }
+
+  .e2e-card {
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-lg); padding:1.65rem;
+    transition:transform var(--t-mid) var(--ease), box-shadow var(--t-mid), border-color var(--t-mid);
+  }
+  .e2e-card:hover { transform:translateY(-4px); box-shadow:var(--sh); border-color:var(--green-tint); }
+  .e2e-icon {
+    width:48px; height:48px; border-radius:var(--r);
+    background:var(--green-pale); border:1px solid var(--green-tint);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; margin-bottom:.9rem;
+  }
+  .e2e-card h4 { margin-bottom:.35rem; }
+  .e2e-card p  { font-size:.81rem; }
+
+  /* ── Docs section ── */
+  .docs-grid {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;
+  }
+  @media(max-width:600px){ .docs-grid{ grid-template-columns:1fr; } }
+
+  .doc-row {
+    display:flex; align-items:center; gap:.9rem;
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-lg); padding:1.1rem 1.3rem;
+    transition:transform var(--t-mid) var(--ease), border-color var(--t-mid);
+  }
+  .doc-row:hover { transform:translateY(-2px); border-color:var(--green-tint); }
+  .doc-icon {
+    width:40px; height:40px; flex-shrink:0;
+    background:var(--green-pale); border-radius:var(--r-sm);
+    display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  }
+  .doc-row h4 { font-size:.85rem; color:var(--ink); margin-bottom:.15rem; }
+  .doc-row p  { font-size:.74rem; color:var(--ink-soft); margin:0; }
+
+  /* ── Why buyers section ── */
+  .why-row {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;
+  }
+  @media(max-width:720px){ .why-row{grid-template-columns:1fr;} }
+
+  .why-item {
+    text-align:center; padding:2rem 1.5rem;
+    background:var(--white); border:1px solid var(--border);
+    border-radius:var(--r-lg);
+    transition:transform var(--t-mid) var(--ease), border-color var(--t-mid);
+  }
+  .why-item:hover { transform:translateY(-4px); border-color:var(--green-tint); }
+  .why-item .icon { font-size:2.2rem; margin-bottom:.85rem; }
+  .why-item h4 { color:var(--ink); margin-bottom:.45rem; }
+  .why-item p  { font-size:.82rem; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Glotrex International<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="payment.html">Trade Terms</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <select id="langSelect" class="lang-select" title="Language">
+          <option value="en">🌐 EN</option>
+          <option value="hi">🇮🇳 हिंदी</option>
+          <option value="mr">🇮🇳 मराठी</option>
+          <option value="de">🇩🇪 DE</option>
+          <option value="ar">🇦🇪 عربي</option>
+          <option value="ru">🇷🇺 RU</option>
+          <option value="pt">🇧🇷 PT</option>
+          <option value="es">🇪🇸 ES</option>
+          <option value="it">🇮🇹 IT</option>
+        </select>
+        <a href="index.html#contact" class="btn btn-green">Get Quote</a>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <button class="mobile-nav-close">✕</button>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="services.html">Services</a>
+  <a href="payment.html">Trade Terms</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+</nav>
+
+<!-- Sticky CTAs -->
+<div class="sticky-ctas">
+  <button class="sticky-call" onclick="window.open('#cta','_self')">
+    <span class="call-icon">📅</span>
+    <span class="call-text">Schedule a 30-Min Strategy Call with our Expert Manager</span>
+  </button>
+  <a class="sticky-wa" href="https://wa.me/918237840136" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="svc-hero">
+  <div class="container">
+    <div class="svc-hero-content">
+      <span class="eyebrow white reveal">End-to-End Export Solutions</span>
+      <h1 class="anim-heading reveal reveal-delay-1">From Farm-Gate<br>Sourcing to<br>Global Port Delivery.</h1>
+      <p class="reveal reveal-delay-2">At Glotrex International, we don't just ship products — we manage the entire lifecycle of your order. Our Expert Export Manager takes over the moment you share your requirements.</p>
+      <div class="hero-btns reveal reveal-delay-3">
+        <a href="#timeline" class="btn btn-outline-white">View Our 5-Phase Process</a>
+        <a href="https://wa.me/918237840136" target="_blank" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3)">💬 Quick Inquiry</a>
+      </div>
+      <div class="hero-meta reveal reveal-delay-4">
+        <div class="hero-meta-item">
+          <div class="icon-box">🏭</div>
+          <span>Physical Supervision at Factory</span>
+        </div>
+        <!-- <div class="hero-meta-item">
+          <div class="icon-box">🔬</div>
+          <span>NABL-Certified Lab Testing</span>
+        </div> -->
+        <div class="hero-meta-item">
+          <div class="icon-box">📦</div>
+          <span>Port-to-Port Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     END-TO-END OVERVIEW
+═══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Our End-to-End Solutions</span>
+      <h2 class="anim-heading">A Complete SOP,<br>Not Just a Shipment</h2>
+      <div class="divider center"></div>
+      <p>We act as your permanent Indian sourcing arm — handling everything from requirement consultation to final container loading with documented precision at every stage.</p>
+    </div>
+    <div class="e2e-grid">
+      <div class="e2e-card reveal reveal-delay-1">
+        <div class="e2e-icon">📋</div>
+        <h4>Technical Consultation</h4>
+        <p>We analyze your exact specifications — mesh size, moisture %, curcumin content, or fabric GSM — before sourcing begins.</p>
+      </div>
+      <div class="e2e-card reveal reveal-delay-2">
+        <div class="e2e-icon">🌾</div>
+        <h4>Ethical Sourcing</h4>
+        <p>Only verified, APEDA-registered processing units. We provide physical samples for your lab validation before bulk production.</p>
+      </div>
+      <div class="e2e-card reveal reveal-delay-3">
+        <div class="e2e-icon">👁️</div>
+        <h4>On-Ground Supervision</h4>
+        <p>Our Expert Export Manager is physically present at the factory during production, grading, and packing stages.</p>
+      </div>
+      <div class="e2e-card reveal reveal-delay-1">
+        <div class="e2e-icon">🧪</div>
+        <h4>Multi-Stage QA</h4>
+        <p>Every batch tested at NABL-accredited labs (SGS / Intertek / TUV) for microbial, pesticide, and chemical compliance.</p>
+      </div>
+      <div class="e2e-card reveal reveal-delay-2">
+        <div class="e2e-icon">🚢</div>
+        <h4>Port Supervision</h4>
+        <p>We supervise container stuffing at Mundra / JNPT. Silica gels, proper lashing, and moisture checks are standard protocol.</p>
+      </div>
+      <div class="e2e-card reveal reveal-delay-3">
+        <div class="e2e-icon">📄</div>
+        <h4>Zero-Error Documentation</h4>
+        <p>Phytosanitary, COO, BL, and Health Certificates — all handled accurately for seamless customs clearance at your port.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     5-PHASE TIMELINE
+═══════════════════════════════════════════════════ -->
+<section class="timeline-section bg-soft b-top b-bottom" id="timeline">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The Glotrex Execution Model</span>
+      <h2 class="anim-heading">5-Phase Process:<br>Inquiry to Port Loading</h2>
+      <div class="divider center"></div>
+      <p>A systematic, Standard Operating Procedure followed on every single order — no exceptions, no shortcuts.</p>
+    </div>
+
+    <div class="timeline-wrap" id="timelineWrap">
+      <div class="timeline-line-fill" id="timelineFill"></div>
+
+      <!-- Phase 1 -->
+      <div class="timeline-step" data-phase="1">
+        <div class="timeline-card">
+          <div class="phase-badge">⚙ Phase 1</div>
+          <h3>Requirement Audit &amp; Technical Consultation</h3>
+          <p>We don't just take orders — we analyze. Whether it's a specific mesh size for onion powder, curcumin levels for turmeric, or GSM for industrial textiles, our Expert Export Manager ensures the sourcing perfectly matches your industrial application and destination-country compliance.</p>
+          <div class="card-details">
+            <span class="detail-chip">Technical spec review</span>
+            <span class="detail-chip">Destination compliance check</span>
+            <span class="detail-chip">2-hr response guarantee</span>
+          </div>
+        </div>
+        <div class="timeline-node"><div class="node-circle">1</div></div>
+        <div class="timeline-blank"></div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="timeline-step" data-phase="2">
+        <div class="timeline-blank"></div>
+        <div class="timeline-node"><div class="node-circle">2</div></div>
+        <div class="timeline-card">
+          <div class="phase-badge">🌾 Phase 2</div>
+          <h3>Ethical Sourcing &amp; Physical Sampling</h3>
+          <p>We source exclusively from verified processing units registered with APEDA. Before main bulk production begins, we provide physical samples to you for independent lab validation (SGS / Intertek) — ensuring zero discrepancies between sample and shipment.</p>
+          <div class="card-details">
+            <span class="detail-chip">APEDA-registered units only</span>
+            <span class="detail-chip">Pre-production physical sample</span>
+            <span class="detail-chip">100% Indian origin assured</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="timeline-step" data-phase="3">
+        <div class="timeline-card">
+          <div class="phase-badge">🏭 Phase 3</div>
+          <h3>Ground-Zero Supervision — Production &amp; Packing</h3>
+          <p>This is the expert difference. Our team is physically present at the processing unit during production. We supervise grading, sorting, moisture-control processes, and final packing to prevent any quality deviation. You receive live photos and videos from the production floor.</p>
+          <div class="card-details">
+            <span class="detail-chip">Physical presence at factory</span>
+            <span class="detail-chip">Live photo / video updates</span>
+            <span class="detail-chip">Grading &amp; sorting oversight</span>
+            <span class="detail-chip">Moisture &amp; purity checks</span>
+          </div>
+        </div>
+        <div class="timeline-node"><div class="node-circle">3</div></div>
+        <div class="timeline-blank"></div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="timeline-step" data-phase="4">
+        <div class="timeline-blank"></div>
+        <div class="timeline-node"><div class="node-circle">4</div></div>
+        <div class="timeline-card">
+          <div class="phase-badge">🔬 Phase 4</div>
+          <h3>Multi-Stage Quality Assurance</h3>
+          <p>Every batch undergoes rigorous testing at NABL-accredited laboratories. We verify microbial limits (Salmonella, E. Coli, Yeast/Mould), pesticide residues, and chemical properties based on the destination country's specific regulations — EU, US FDA, GCC, or others.</p>
+          <div class="card-details">
+            <span class="detail-chip">NABL-accredited lab reports</span>
+            <span class="detail-chip">SGS / Intertek / TUV</span>
+            <span class="detail-chip">EU &amp; US FDA compliance</span>
+            <span class="detail-chip">Pesticide &amp; microbial testing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="timeline-step" data-phase="5">
+        <div class="timeline-card">
+          <div class="phase-badge">🚢 Phase 5</div>
+          <h3>Secure Palletization &amp; Port Loading</h3>
+          <p>We supervise container stuffing at Mundra or JNPT port. High-quality palletization, moisture-absorbent silica gels, and secure lashing are standard protocols. Pre-shipment inspection by your nominated agency (SGS, Bureau Veritas, etc.) is always welcomed and encouraged.</p>
+          <div class="card-details">
+            <span class="detail-chip">Mundra / JNPT port loading</span>
+            <span class="detail-chip">Silica gel &amp; moisture control</span>
+            <span class="detail-chip">Pre-shipment inspection welcome</span>
+            <span class="detail-chip">Secure container stuffing</span>
+          </div>
+        </div>
+        <div class="timeline-node"><div class="node-circle">5</div></div>
+        <div class="timeline-blank"></div>
+      </div>
+
+    </div><!-- /timeline-wrap -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     DOCUMENTATION MASTERY
+═══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:4.5rem;align-items:center">
+
+      <div class="reveal from-left">
+        <span class="eyebrow">Zero-Error Documentation</span>
+        <h2 class="anim-heading">Navigating Global Compliance<br>with Precision</h2>
+        <div class="divider"></div>
+        <p style="margin-bottom:1.75rem">International trade fails when paperwork is weak. We specialize in providing accurate and timely documentation — covering every requirement at your destination port, whether Dubai, Hamburg, or New York.</p>
+        <a href="payment.html" class="btn btn-green btn-arrow">View Payment &amp; Trade Terms</a>
+      </div>
+
+      <div class="docs-grid reveal from-right">
+        <div class="doc-row">
+          <div class="doc-icon">🌿</div>
+          <div>
+            <h4>Phytosanitary Certificate</h4>
+            <p>Mandatory for all agro-products. Issued by Government of India authorities.</p>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">📜</div>
+          <div>
+            <h4>Certificate of Origin (COO)</h4>
+            <p>Preferential &amp; non-preferential COO for tariff benefits at destination.</p>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">🧪</div>
+          <div>
+            <h4>NABL Lab Analysis Reports</h4>
+            <p>Quality &amp; purity validation — SGS, Intertek, TUV SUD certified.</p>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">🏥</div>
+          <div>
+            <h4>Health &amp; Analysis Certificates</h4>
+            <p>Product-specific health declarations for EU, GCC, and US FDA import norms.</p>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">🚢</div>
+          <div>
+            <h4>Bill of Lading (BL)</h4>
+            <p>Issued by Tier-1 shipping lines — clean BL guaranteed on every shipment.</p>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon">📦</div>
+          <div>
+            <h4>Export Packing List</h4>
+            <p>Detailed packing declaration — net/gross weight, number of bags, marks &amp; numbers.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     WHY BUYERS CHOOSE OUR PROCESS
+═══════════════════════════════════════════════════ -->
+<section class="section bg-green-pale b-top b-bottom">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The Buyer's Advantage</span>
+      <h2 class="anim-heading">Why Global Buyers Choose<br>Our Execution Process</h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="why-row">
+      <div class="why-item reveal reveal-delay-1">
+        <div class="icon">🤝</div>
+        <h4>Physical Ownership</h4>
+        <p>We act as your eyes and ears on the ground in India. You never have to worry about what is happening at the factory — we are there, always.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="icon">📸</div>
+        <h4>Full Transparency</h4>
+        <p>You receive live updates, photographs, and videos of your product during processing and loading stages. No surprises — only certainty.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="icon">⏱️</div>
+        <h4>On-Time Delivery</h4>
+        <p>Our logistics network is optimised for the shortest lead times from India to Dubai, Europe, and the Americas — backed by Tier-1 shipping lines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════════ -->
+<section class="section" id="cta">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <span class="eyebrow" style="color:rgba(255,255,255,.55)">Ready for a Transparent Export Experience?</span>
+      <h2 class="anim-heading" style="color:var(--white)">Start Your Export Journey<br>with Glotrex</h2>
+      <div class="divider center" style="background:rgba(255,255,255,.35)"></div>
+      <p>Our Expert Export Manager will conduct a detailed audit of your requirements — mesh size, curcumin levels, fabric GSM, destination compliance — and give you a precise sourcing plan.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn btn-outline-white" style="padding:.88rem 2.2rem">📅 Schedule a 30-Min Strategy Call</a>
+        <a href="https://wa.me/918237840136" target="_blank" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.35)">💬 Quick Inquiry on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:#fff">Glotrex<span class="dot" style="color:#5DB87A">.</span></div>
+        <p>Engineering reliability in global trade. India's premier exporter of dehydrated agro-products, premium spices &amp; industrial textiles.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <a href="https://wa.me/918237840136" target="_blank" class="btn btn-green" style="font-size:.73rem;padding:.55rem 1.1rem">💬 WhatsApp</a>
+          <a href="mailto:info@glotrexinternational.com" class="btn" style="font-size:.73rem;padding:.55rem 1.1rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.12)">✉ Email</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Quick Links</h5><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="payment.html">Trade Terms</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Products</h5><ul>
+        <li><a href="products.html#agriculture">Dehydrated Onion</a></li>
+        <li><a href="products.html#agriculture">Dehydrated Garlic</a></li>
+        <li><a href="products.html#spices">Turmeric &amp; Spices</a></li>
+        <li><a href="products.html#textile">Uniforms &amp; Textiles</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Quick Inquiry</h5>
+        <form class="footer-inquiry-form" id="footerInquiryForm">
+          <input type="text" name="name" placeholder="Your Name *" required/>
+          <input type="text" name="company" placeholder="Company Name"/>
+          <input type="text" name="country" placeholder="Country *" required/>
+          <select name="product"><option value="">Interested Product</option><option>Dehydrated Onion</option><option>Dehydrated Garlic</option><option>Turmeric / Spices</option><option>Uniforms / Textiles</option></select>
+          <textarea name="message" placeholder="Your requirements"></textarea>
+          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center">Send via WhatsApp →</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Glotrex International. All rights reserved.</span>
+      <span>Made in India 🇮🇳 · Exporting to the World 🌍</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+/* ── Timeline scroll animation ── */
+(function() {
+  const steps = document.querySelectorAll('.timeline-step');
+  const fill  = document.getElementById('timelineFill');
+  const wrap  = document.getElementById('timelineWrap');
+
+  if (!wrap || !fill) return;
+
+  const stepObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.35 });
+
+  steps.forEach(s => stepObs.observe(s));
+
+  /* Animate the green progress line as user scrolls through timeline */
+  function updateFill() {
+    const wrapRect = wrap.getBoundingClientRect();
+    const wh = window.innerHeight;
+    // Progress: 0 when timeline top reaches viewport center, 1 when bottom does
+    const progress = Math.max(0, Math.min(1,
+      (wh * 0.6 - wrapRect.top) / (wrapRect.height - wh * 0.1)
+    ));
+    fill.style.height = (progress * 100) + '%';
+  }
+
+  window.addEventListener('scroll', updateFill, { passive: true });
+  updateFill();
+})();
+</script>
+</body>
+</html>
