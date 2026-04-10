@@ -15,9 +15,9 @@ if (navbar) {
 }
 
 /* ── 2. Hamburger / Mobile nav ─────────────────────────── */
-const hamburger  = document.querySelector('.hamburger');
-const mobileNav  = document.querySelector('.mobile-nav');
-const mobileClose= document.querySelector('.mobile-nav-close');
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.querySelector('.mobile-nav');
+const mobileClose = document.querySelector('.mobile-nav-close');
 if (hamburger && mobileNav) {
   hamburger.addEventListener('click', () => {
     mobileNav.classList.add('open');
@@ -95,8 +95,8 @@ function initScrollReveal() {
 function animateCounter(el) {
   const target = parseFloat(el.dataset.target);
   const suffix = el.dataset.suffix || '';
-  const dur    = 1600;
-  const t0     = performance.now();
+  const dur = 1600;
+  const t0 = performance.now();
   (function tick(now) {
     const p = Math.min((now - t0) / dur, 1);
     const v = (1 - Math.pow(1 - p, 3)) * target;
@@ -118,7 +118,7 @@ function initCounters() {
 function initAccordion() {
   document.querySelectorAll('.accordion-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
-      const body   = trigger.nextElementSibling;
+      const body = trigger.nextElementSibling;
       const isOpen = body.classList.contains('open');
       document.querySelectorAll('.accordion-body.open').forEach(b => b.classList.remove('open'));
       document.querySelectorAll('.accordion-trigger.active').forEach(t => t.classList.remove('active'));
@@ -136,18 +136,49 @@ if (langSel) {
   });
 }
 
-/* ── 9. Footer form → WhatsApp ──────────────────────────── */
-const footerForm = document.getElementById('footerInquiryForm');
-if (footerForm) {
-  footerForm.addEventListener('submit', e => {
+/* ── 9. Footer form → Email ──────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('footerInquiryForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(footerForm).entries());
-    const msg = encodeURIComponent(
-      `Hello Glotrex International,\nName: ${d.name}\nCompany: ${d.company||'N/A'}\nCountry: ${d.country}\nProduct: ${d.product||'N/A'}\nMessage: ${d.message||'—'}`
-    );
-    window.open(`https://wa.me/919XXXXXXXXX?text=${msg}`, '_blank');
+
+    const btn = this.querySelector('button');
+    const originalText = btn.innerText;
+
+    // UI Feedback
+    btn.innerText = "Sending...";
+    btn.disabled = true;
+
+    // Gather form data
+    const formData = {
+      name: this.name.value,
+      company: this.company.value,
+      country: this.country.value,
+      contact: this.contact.value,
+      products: this.products.value,
+      message: this.message.value
+    };
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      alert("Message sent successfully!");
+      this.reset();
+    } catch (err) {
+      alert("Failed to send. Please check your connection.");
+      console.error(err);
+    } finally {
+      // Restore UI
+      btn.innerText = originalText;
+      btn.disabled = false;
+    }
   });
-}
+});
 
 /* ── 10. Smooth anchor ──────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -168,13 +199,13 @@ if (modalOverlay) {
 function openModal(product, categoryLabel, colorClass) {
   const o = document.getElementById('productModal');
   if (!o) return;
-  o.querySelector('.modal-product-img').src  = product.image;
-  o.querySelector('.modal-product-img').alt  = product.name;
-  o.querySelector('.modal-product-name').textContent   = product.name;
+  o.querySelector('.modal-product-img').src = product.image;
+  o.querySelector('.modal-product-img').alt = product.name;
+  o.querySelector('.modal-product-name').textContent = product.name;
   o.querySelector('.modal-category-label').textContent = categoryLabel;
-  o.querySelector('.modal-product-desc').textContent   = product.description;
+  o.querySelector('.modal-product-desc').textContent = product.description;
   o.querySelector('.modal-specs').innerHTML = Object.entries(product.specs)
-    .map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+    .map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
   o.querySelector('.modal-certs').innerHTML = product.certifications
     .map(c => `<span class="cert-tag cert-tag-default">${c}</span>`).join('');
   // Color stripe on modal header
@@ -192,7 +223,7 @@ function closeModal() {
   if (o) { o.classList.remove('open'); document.body.style.overflow = ''; }
 }
 
-window.openModal  = openModal;
+window.openModal = openModal;
 window.closeModal = closeModal;
 
 /* ── Boot ───────────────────────────────────────────────── */
