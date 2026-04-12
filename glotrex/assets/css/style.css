@@ -378,6 +378,59 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 }
 .mobile-nav-close:hover { color:var(--ink); }
 
+/* Mobile Language Selector (Top Right) */
+.mobile-lang-top {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 4.5rem;
+  z-index: 999;
+}
+
+.lang-select-mobile-top {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-body);
+  font-size: 0.73rem;
+  font-weight: 500;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--t-fast), background var(--t-fast);
+  width: auto;
+  min-width: 110px;
+  white-space: nowrap;
+  appearance: auto;
+  -webkit-appearance: menulist;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.lang-select-mobile-top option {
+  background: var(--white);
+  color: var(--ink);
+  padding: 0.5rem;
+  font-size: 0.73rem;
+}
+
+.lang-select-mobile-top option:checked {
+  background: linear-gradient(var(--green), var(--green));
+  color: var(--white);
+}
+
+.lang-select-mobile-top:focus {
+  border-color: var(--green) !important;
+}
+
+/* Match the color switch when the navbar is scrolled */
+#navbar.scrolled .lang-select-mobile-top {
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--ink-soft) !important;
+}
+
 /* ══════════════════════════════════════════════════════════
    STICKY CTAs
 ══════════════════════════════════════════════════════════ */
@@ -1089,6 +1142,7 @@ footer { background:var(--ink); padding:68px 0 0; }
 
   .nav-links,.nav-cta { display:none; }
   .hamburger { display:flex; }
+  .mobile-lang-top { display: block; }
 
   .intro-img { height:270px; }
   .intro-badge { left:0.75rem; bottom:0.75rem; }

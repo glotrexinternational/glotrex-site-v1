@@ -131,13 +131,15 @@ function initAccordion() {
 document.addEventListener('DOMContentLoaded', () => {
   const sel = document.getElementById('langSelect');
   const selMobile = document.getElementById('langSelectMobile');
+  const selMobileTop = document.getElementById('langSelectMobileTop');
   
-  if (!sel && !selMobile) return;
+  if (!sel && !selMobile && !selMobileTop) return;
 
   // Restore saved language from localStorage
   const saved = localStorage.getItem('glotrex_lang') || 'en';
   if (sel) sel.value = saved;
   if (selMobile) selMobile.value = saved;
+  if (selMobileTop) selMobileTop.value = saved;
 
   // Sync both selectors and handle language change
   const handleLangChange = (lang) => {
@@ -156,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sel.addEventListener('change', (e) => {
       const lang = e.target.value;
       if (selMobile) selMobile.value = lang;
+      if (selMobileTop) selMobileTop.value = lang;
       handleLangChange(lang);
     });
   }
@@ -164,6 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
     selMobile.addEventListener('change', (e) => {
       const lang = e.target.value;
       if (sel) sel.value = lang;
+      if (selMobileTop) selMobileTop.value = lang;
+      handleLangChange(lang);
+    });
+  }
+
+  if (selMobileTop) {
+    selMobileTop.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      if (sel) sel.value = lang;
+      if (selMobile) selMobile.value = lang;
       handleLangChange(lang);
     });
   }
