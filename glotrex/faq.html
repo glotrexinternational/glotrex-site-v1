@@ -12,6 +12,20 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="assets/css/style.css" />
+      <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,mr,de,ar,ru,pt,es,it,bn,ne,ms,id',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'gte');
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+  <div id="gte" style="display:none;position:absolute;top:-9999px;left:-9999px"></div>
+
+
   <style>
     /* ── FAQ layout ─────────────────────────────────── */
     .faq-layout {
@@ -144,6 +158,19 @@
       font-size: .9rem;
       pointer-events: none;
     }
+    .goog-te-banner-frame,
+    .goog-te-gadget,
+    .skiptranslate,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    /* Prevent font override by Google Translate */
+    font {
+      color: inherit !important;
+    }
   </style>
 </head>
 
@@ -165,11 +192,12 @@
         <div class="nav-cta">
           <select id="langSelect" class="lang-select" title="Language">
             <option value="en">🌐 EN</option>
-            <option value="hi">🇮🇳 हिंदी</option>
-            <option value="mr">🇮🇳 मराठी</option>
             <option value="de">🇩🇪 DE</option>
             <option value="ar">🇦🇪 عربي</option>
             <option value="ru">🇷🇺 RU</option>
+            <option value="pt">🇧🇷 PT</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="it">🇮🇹 IT</option>
           </select>
           <a href="index.html#contact" class="btn btn-green">Get Quote</a>
         </div>
@@ -478,7 +506,7 @@
           </form>
         </div>
       </div>
-      <div class="footer-socials">
+      <div class="footer-socials" style="justify-content: center;">
         <a href="https://www.facebook.com/share/1ArCJsv1jY/" class="social-btn facebook-btn" aria-label="Facebook"
           target="_blank">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

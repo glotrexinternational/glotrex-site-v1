@@ -284,16 +284,32 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 #navbar.scrolled .nav-links a.active { color:var(--ink); }
 #navbar.scrolled .nav-links a::after { background:var(--green); }
 
-.nav-cta {display:flex; align-items:center; gap:0.55rem; }
+.nav-cta {display:flex; align-items:center; gap:0.6rem; flex-wrap:nowrap; }
 
 .lang-select {
   background:rgba(255,255,255,0.12);
   border:1px solid rgba(255,255,255,0.2);
-  color:rgb(0, 0, 0);
-  font-family:var(--font-body); font-size:0.74rem; font-weight:500;
-  padding:0.38rem 0.55rem;
+  color:rgba(255,255,255,0.85);
+  font-family:var(--font-body); font-size:0.73rem; font-weight:500;
+  padding:0.4rem 0.6rem;
   border-radius:var(--r-sm); cursor:pointer; outline:none;
   transition:border-color var(--t-fast), background var(--t-fast);
+  width:auto; min-width:110px; max-width:145px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+/* Ensure dropdown options are visible */
+.lang-select option {
+  background: var(--white);
+  color: var(--ink);
+  padding: 0.5rem;
+  font-size: 0.73rem;
+}
+
+.lang-select option:checked {
+  background: linear-gradient(var(--green), var(--green));
+  color: var(--white);
 }
 #navbar.scrolled .lang-select {
   background:var(--bg-soft); border-color:var(--border); color:var(--ink-soft);
@@ -320,7 +336,7 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
   display:none; position:fixed; inset:0;
   background:var(--white); z-index:899;
   flex-direction:column; align-items:center;
-  justify-content:center; gap:0.4rem; padding:2rem;
+  justify-content:center; gap:1.2rem; padding:2rem;
 }
 .mobile-nav.open { display:flex; }
 .mobile-nav a {
@@ -329,6 +345,31 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
   transition:color var(--t-fast);
 }
 .mobile-nav a:hover { color:var(--green); }
+
+.lang-select-mobile {
+  font-size:1rem !important;
+  padding:0.55rem 0.85rem !important;
+  background:var(--bg-soft) !important;
+  border:1.5px solid var(--green) !important;
+  color:var(--ink) !important;
+  border-radius:var(--r) !important;
+  margin-bottom:0.6rem !important;
+}
+
+.lang-select-mobile option {
+  background: var(--white);
+  color: var(--ink);
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.lang-select-mobile option:checked {
+  background: linear-gradient(var(--green), var(--green));
+  color: var(--white);
+}
+
+.lang-select-mobile:focus { border-color:var(--green-dark) !important; }
+
 .mobile-nav-close {
   position:absolute; top:1.2rem; right:1.5rem;
   font-size:1.5rem; color:var(--ink-soft);
@@ -1212,4 +1253,75 @@ footer { background:var(--ink); padding:68px 0 0; }
 .product-card.expanded {
   border-color: var(--green-tint);
   box-shadow: var(--sh-lg);
+}
+
+/* Google Translator */
+/* ══════════════════════════════════════════════════════════
+   GOOGLE TRANSLATOR (Theme Matched)
+══════════════════════════════════════════════════════════ */
+#google_translate_element {
+  display: inline-block;
+}
+
+/* Style the native Google dropdown to match your exact .lang-select specs */
+.goog-te-combo {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  color: var(--white) !important; /* White text for transparent top nav */
+  font-family: var(--font-body) !important;
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  padding: 0.38rem 0.55rem !important;
+  border-radius: var(--r-sm) !important;
+  cursor: pointer;
+  outline: none !important;
+  transition: border-color var(--t-fast), background var(--t-fast) !important;
+}
+
+/* Match the color switch when the navbar is scrolled */
+#navbar.scrolled .goog-te-combo {
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--ink-soft) !important;
+}
+
+/* Hover & Focus state using your primary green */
+.goog-te-combo:hover,
+.goog-te-combo:focus {
+  border-color: var(--green) !important;
+}
+
+/* Hide ALL Google Branding & Tooltips */
+.goog-logo-link, 
+.goog-te-gadget span, 
+.goog-te-banner-frame,
+#goog-gt-tt, 
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+/* Container for dropdown - keep visible */
+.goog-te-gadget {
+  display: inline-block !important;
+  font-size: 1rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Make option text visible */
+.goog-te-combo option {
+  color: var(--ink) !important;
+  background: var(--white) !important;
+}
+
+/* Remove yellow highlight on translated text */
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Prevent the Google top bar from pushing your layout down */
+body {
+  top: 0 !important;
+  position: static !important;
 }

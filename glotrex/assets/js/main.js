@@ -128,13 +128,46 @@ function initAccordion() {
 }
 
 /* ── 8. Google Translate ────────────────────────────────── */
-const langSel = document.getElementById('langSelect');
-if (langSel) {
-  langSel.addEventListener('change', e => {
-    const el = document.querySelector('.goog-te-combo');
-    if (el) { el.value = e.target.value; el.dispatchEvent(new Event('change')); }
-  });
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const sel = document.getElementById('langSelect');
+  const selMobile = document.getElementById('langSelectMobile');
+  
+  if (!sel && !selMobile) return;
+
+  // Restore saved language from localStorage
+  const saved = localStorage.getItem('glotrex_lang') || 'en';
+  if (sel) sel.value = saved;
+  if (selMobile) selMobile.value = saved;
+
+  // Sync both selectors and handle language change
+  const handleLangChange = (lang) => {
+    localStorage.setItem('glotrex_lang', lang);
+    
+    if (lang === 'en') {
+      document.cookie = 'googtrans=; Max-Age=0; path=/';
+    } else {
+      document.cookie = `googtrans=/en/${lang}; path=/; max-age=31536000`;
+    }
+    
+    location.reload();
+  };
+
+  if (sel) {
+    sel.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      if (selMobile) selMobile.value = lang;
+      handleLangChange(lang);
+    });
+  }
+
+  if (selMobile) {
+    selMobile.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      if (sel) sel.value = lang;
+      handleLangChange(lang);
+    });
+  }
+});
 
 /* ── 9. Footer form → Email ──────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {

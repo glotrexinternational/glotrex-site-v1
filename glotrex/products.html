@@ -12,6 +12,19 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="assets/css/style.css" />
+    <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,mr,de,ar,ru,pt,es,it,bn,ne,ms,id',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'gte');
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+  <div id="gte" style="display:none;position:absolute;top:-9999px;left:-9999px"></div>
+
   <style>
     .products-grid {
       display: grid;
@@ -56,6 +69,19 @@
     .modal-header-stripe {
       height: 4px;
     }
+    .goog-te-banner-frame,
+    .goog-te-gadget,
+    .skiptranslate,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    /* Prevent font override by Google Translate */
+    font {
+      color: inherit !important;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
@@ -79,8 +105,6 @@
         <div class="nav-cta">
           <select id="langSelect" class="lang-select" title="Language">
             <option value="en">🌐 EN</option>
-            <option value="hi">🇮🇳 हिंदी</option>
-            <option value="mr">🇮🇳 मराठी</option>
             <option value="de">🇩🇪 DE</option>
             <option value="ar">🇦🇪 عربي</option>
             <option value="ru">🇷🇺 RU</option>
@@ -144,30 +168,6 @@
     </div>
   </div>
 
-  <!-- Product Modal -->
-  <div class="modal-overlay" id="productModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-header-stripe agri"></div>
-        <img class="modal-product-img" src="" alt="" loading="lazy" />
-        <div class="modal-header-overlay"></div>
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>
-      <div class="modal-body">
-        <span class="eyebrow modal-category-label"></span>
-        <h2 class="modal-product-name"></h2>
-        <p class="modal-product-desc"></p>
-        <table class="spec-table">
-          <tbody class="modal-specs"></tbody>
-        </table>
-        <!-- <div class="cert-tags modal-certs" style="margin-bottom:1.4rem"></div> -->
-        <div class="modal-actions">
-          <a href="https://wa.me/918237840136" target="_blank" class="btn btn-green">💬 WhatsApp Inquiry</a>
-          <a href="#" class="btn btn-ghost">📋 Request Sample</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Inline CTA -->
   <section class="section bg-green-pale b-top">
@@ -473,7 +473,6 @@
           <span class="spec-k">${k}</span>
           <span class="spec-v">${v}</span>
         </div>`).join('')}
-      <button class="spec-inquiry-btn">💬 WhatsApp Inquiry</button>
     </div>
     <div class="card-expand-hint">Tap to view specs ↓</div>
   </div>`;
@@ -482,12 +481,6 @@
                 // close all others first
                 document.querySelectorAll('.product-card.expanded').forEach(c => c.classList.remove('expanded'));
                 if (!isOpen) card.classList.add('expanded');
-              });
-
-              card.querySelector('.spec-inquiry-btn').addEventListener('click', e => {
-                e.stopPropagation();
-                const msg = encodeURIComponent(`Hello Glotrex International,\nProduct Inquiry: ${product.name}\nDescription: ${product.description}`);
-                window.open(`https://wa.me/919XXXXXXXXX?text=${msg}`, '_blank');
               });
               grid.appendChild(card);
             });
