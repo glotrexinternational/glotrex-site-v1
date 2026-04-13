@@ -244,6 +244,7 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 .nav-inner {
   display:flex; align-items:center;
   justify-content:space-between; gap:1.5rem;
+  position:relative;
 }
 
 .nav-logo {
@@ -251,6 +252,18 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
   color:var(--white); letter-spacing:-0.02em;
   display:flex; align-items:center; gap:1px; flex-shrink:0;
   transition:color var(--t-fast);
+}
+.nav-logo__mark {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:50%; overflow:hidden;
+  margin-right:0.6rem; color:var(--green); flex-shrink:0;
+}
+.nav-logo__mark svg { width:20px; height:20px; display:block; }
+.nav-logo__mark img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
 .nav-logo .dot { color:#7FD4A2; }
 #navbar.scrolled .nav-logo { color:var(--ink); }
@@ -312,7 +325,7 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
   color: var(--white);
 }
 #navbar.scrolled .lang-select {
-  background:var(--bg-soft); border-color:var(--border); color:var(--ink-soft);
+  background: var(--white); border-color: var(--green); color: var(--ink);
 }
 .lang-select:focus { border-color:var(--green); }
 
@@ -381,10 +394,16 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 /* Mobile Language Selector (Top Right) */
 .mobile-lang-top {
   display: none;
-  position: fixed;
-  top: 1rem;
-  right: 4.5rem;
-  z-index: 999;
+  /* position inside the navbar so it aligns with the hamburger reliably */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* default offset; media queries tighten this for smaller screens */
+  right: 4.2rem;
+  z-index: 910;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
 }
 
 .lang-select-mobile-top {
@@ -426,9 +445,9 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 
 /* Match the color switch when the navbar is scrolled */
 #navbar.scrolled .lang-select-mobile-top {
-  background: var(--bg-soft) !important;
-  border-color: var(--border) !important;
-  color: var(--ink-soft) !important;
+  background: var(--white) !important;
+  border-color: var(--green) !important;
+  color: var(--ink) !important;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1142,7 +1161,9 @@ footer { background:var(--ink); padding:68px 0 0; }
 
   .nav-links,.nav-cta { display:none; }
   .hamburger { display:flex; }
-  .mobile-lang-top { display: block; }
+  .mobile-lang-top { display: block; position: absolute; top: 50%; transform:translateY(-50%); right: 3.2rem; }
+  /* tighten position/size on medium phones so it fits between logo and hamburger */
+  .lang-select-mobile-top { min-width: 78px; font-size:0.66rem; padding:0.24rem 0.4rem; height:36px; }
 
   .intro-img { height:270px; }
   .intro-badge { left:0.75rem; bottom:0.75rem; }
@@ -1164,6 +1185,9 @@ footer { background:var(--ink); padding:68px 0 0; }
   .stats-bar .stat-item { padding:1.4rem 0.9rem; }
   .stat-num { font-size:2.1rem; }
   .btn { padding:0.62rem 1.15rem; font-size:0.73rem; }
+  /* extra tightening on very small screens */
+  .mobile-lang-top { right: 2.8rem; top: 50%; transform:translateY(-50%); }
+  .lang-select-mobile-top { min-width: 70px; font-size:0.62rem; padding:0.2rem 0.35rem; }
 }
 
 .product-specs {
