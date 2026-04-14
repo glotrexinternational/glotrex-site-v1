@@ -1,0 +1,6 @@
+name = "glotrex-mailer"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[send_email]]
+name = "SEND_EMAIL"

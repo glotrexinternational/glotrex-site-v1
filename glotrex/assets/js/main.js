@@ -190,42 +190,39 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('footerInquiryForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const btn = this.querySelector('button');
-    const originalText = btn.innerText;
-
-    // UI Feedback
-    btn.innerText = "Sending...";
+    const btn = this.querySelector('button[type=submit]');
+    btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    // Gather form data
-    const formData = {
-      name: this.name.value,
-      company: this.company.value,
-      country: this.country.value,
-      contact: this.contact.value,
+    const payload = {
+      name:     this.name.value,
+      company:  this.company.value,
+      country:  this.country.value,
+      contact:  this.contact.value,
       products: this.products.value,
-      message: this.message.value
+      message:  this.message.value,
     };
 
     try {
-      const response = await fetch('/api/send', {
+      const res = await fetch('https://glotrex-mailer.glotrexinternational.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error('Network response was not ok');
+      const json = await res.json();
 
-      alert("Message sent successfully!");
-      this.reset();
-    } catch (err) {
-      alert("Failed to send. Please check your connection.");
-      console.error(err);
-    } finally {
-      // Restore UI
-      btn.innerText = originalText;
-      btn.disabled = false;
+      if (json.success) {
+        btn.textContent = '✅ Sent! We\'ll reply soon.';
+        this.reset();
+      } else {
+        btn.textContent = '❌ Failed. Try WhatsApp.';
+      }
+    } catch {
+      btn.textContent = '❌ Error. Try WhatsApp.';
     }
+
+    setTimeout(() => { btn.textContent = 'Send via Email →'; btn.disabled = false; }, 4000);
   });
 });
 
