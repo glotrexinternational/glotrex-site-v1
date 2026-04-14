@@ -128,99 +128,61 @@ function initAccordion() {
 }
 
 /* ── 8. Google Translate ────────────────────────────────── */
+/*
+ * Root cause of the "can't change again" bug:
+ * Google Translate ignores repeated programmatic .dispatchEvent('change')
+ * calls on its internal <select> once the page is already translated —
+ * it only reliably re-translates on a fresh page load with the googtrans
+ * cookie already set.
+ *
+ * Fix: on change → write cookie → reload. On load → read cookie → sync UI.
+ * This works every single time with zero retry logic needed.
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  const sel = document.getElementById('langSelect');
-  const selMobile = document.getElementById('langSelectMobile');
-  const selMobileTop = document.getElementById('langSelectMobileTop');
-  
-  if (!sel && !selMobile && !selMobileTop) return;
+  const selectors = [
+    document.getElementById('langSelect'),
+    document.getElementById('langSelectMobile'),
+    document.getElementById('langSelectMobileTop'),
+  ].filter(Boolean);
 
-  // Restore saved language from localStorage
-  const saved = localStorage.getItem('glotrex_lang') || 'en';
-  if (sel) sel.value = saved;
-  if (selMobile) selMobile.value = saved;
-  if (selMobileTop) selMobileTop.value = saved;
+  if (!selectors.length) return;
 
-  // Apply saved language on page load
-  if (saved !== 'en') {
-    document.cookie = `googtrans=/en/${saved}; path=/; max-age=31536000`;
-    // Wait a bit for Google Translate to load, then trigger it
-    setTimeout(() => {
-      triggerGoogleTranslate(saved);
-    }, 500);
-  }
-
-  // Helper: Find and trigger Google Translate's language change
-  const triggerGoogleTranslate = (lang) => {
-    // Try to find the Google Translate select in the page
-    const handleLanguageChange = () => {
-      const gtSelect = document.querySelector('select.goog-te-combo');
-      if (gtSelect) {
-        gtSelect.value = lang;
-        gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
-        return true;
-      }
-      return false;
-    };
-
-    // Try immediately
-    if (handleLanguageChange()) return;
-
-    // If not found, wait and try again (GT might not be loaded yet)
-    let attempts = 0;
-    const timer = setInterval(() => {
-      if (handleLanguageChange()) {
-        clearInterval(timer);
-      }
-      attempts++;
-      if (attempts > 20) clearInterval(timer); // Stop after 10 seconds
-    }, 500);
+  // ── Read current language from the googtrans cookie (source of truth) ──
+  const getCookieLang = () => {
+    const match = document.cookie.match(/(?:^|;\s*)googtrans=\/en\/([^;]+)/);
+    return match ? match[1] : 'en';
   };
 
-  // Sync and handle language change
-  const handleLangChange = (lang) => {
-    localStorage.setItem('glotrex_lang', lang);
-    
-    // Update cookie
+  // ── Write / clear the googtrans cookie ──
+  const setCookieLang = (lang) => {
     if (lang === 'en') {
+      // Clear on both / and current path so GT picks it up
       document.cookie = 'googtrans=; Max-Age=0; path=/';
+      document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname;
     } else {
-      document.cookie = `googtrans=/en/${lang}; path=/; max-age=31536000`;
+      const val = `/en/${lang}`;
+      document.cookie = `googtrans=${val}; path=/; max-age=31536000`;
+      document.cookie = `googtrans=${val}; path=${location.pathname}; max-age=31536000`;
     }
-    
-    // Trigger immediate language change without reload
-    triggerGoogleTranslate(lang);
   };
 
-  const syncSelectors = (lang) => {
-    if (sel && sel.value !== lang) sel.value = lang;
-    if (selMobile && selMobile.value !== lang) selMobile.value = lang;
-    if (selMobileTop && selMobileTop.value !== lang) selMobileTop.value = lang;
+  // ── Sync all dropdowns to show the current active language ──
+  const syncUI = (lang) => selectors.forEach(s => { s.value = lang; });
+
+  // On page load: restore dropdowns to match whatever cookie is set
+  const currentLang = getCookieLang();
+  syncUI(currentLang);
+
+  // ── Handle user picking a new language ──
+  const handleChange = (lang) => {
+    if (lang === getCookieLang()) return; // already on this language, skip reload
+    setCookieLang(lang);
+    location.reload();                   // reload so GT applies the new cookie cleanly
   };
 
-  if (sel) {
-    sel.addEventListener('change', (e) => {
-      const lang = e.target.value;
-      syncSelectors(lang);
-      handleLangChange(lang);
-    });
-  }
-
-  if (selMobile) {
-    selMobile.addEventListener('change', (e) => {
-      const lang = e.target.value;
-      syncSelectors(lang);
-      handleLangChange(lang);
-    });
-  }
-
-  if (selMobileTop) {
-    selMobileTop.addEventListener('change', (e) => {
-      const lang = e.target.value;
-      syncSelectors(lang);
-      handleLangChange(lang);
-    });
-  }
+  selectors.forEach(s => {
+    s.addEventListener('change', (e) => handleChange(e.target.value));
+  });
 });
 
 /* ── 9. Footer form → Email ──────────────────────────── */
