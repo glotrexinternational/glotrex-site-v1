@@ -145,20 +145,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleLangChange = (lang) => {
     localStorage.setItem('glotrex_lang', lang);
     
+    // Set the cookie for Google Translate
     if (lang === 'en') {
       document.cookie = 'googtrans=; Max-Age=0; path=/';
     } else {
       document.cookie = `googtrans=/en/${lang}; path=/; max-age=31536000`;
     }
     
-    location.reload();
+    // Attempt to trigger Google Translate language change
+    const gtSelect = document.querySelector('select.goog-te-combo');
+    if (gtSelect) {
+      gtSelect.value = lang;
+      gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    } else {
+      // Fallback to reload if Google Translate widget not found
+      location.reload();
+    }
+  };
+
+  const syncSelectors = (lang) => {
+    if (sel && sel.value !== lang) sel.value = lang;
+    if (selMobile && selMobile.value !== lang) selMobile.value = lang;
+    if (selMobileTop && selMobileTop.value !== lang) selMobileTop.value = lang;
   };
 
   if (sel) {
     sel.addEventListener('change', (e) => {
       const lang = e.target.value;
-      if (selMobile) selMobile.value = lang;
-      if (selMobileTop) selMobileTop.value = lang;
+      syncSelectors(lang);
       handleLangChange(lang);
     });
   }
@@ -166,8 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selMobile) {
     selMobile.addEventListener('change', (e) => {
       const lang = e.target.value;
-      if (sel) sel.value = lang;
-      if (selMobileTop) selMobileTop.value = lang;
+      syncSelectors(lang);
       handleLangChange(lang);
     });
   }
@@ -175,8 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selMobileTop) {
     selMobileTop.addEventListener('change', (e) => {
       const lang = e.target.value;
-      if (sel) sel.value = lang;
-      if (selMobile) selMobile.value = lang;
+      syncSelectors(lang);
       handleLangChange(lang);
     });
   }
