@@ -2,10 +2,10 @@ import { EmailMessage } from "cloudflare:email";
 import { createMimeMessage } from "mimetext/browser";
 
 const FROM = "noreply@glotrexinternational.com"; // your domain
-const TO   = "info@glotrexinternational.com";    // your verified inbox
+const TO = "info@glotrexinternational.com";    // your verified inbox
 
 const CORS = {
-  "Access-Control-Allow-Origin":  "*",
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 };
@@ -13,7 +13,7 @@ const CORS = {
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
-    if (request.method !== "POST")    return new Response("Not allowed", { status: 405 });
+    if (request.method !== "POST") return new Response("Not allowed", { status: 405 });
 
     const { name, company, country, contact, email, products, message } = await request.json();
 
@@ -26,9 +26,8 @@ export default {
     const msg = createMimeMessage();
     msg.setSender({ name: "Glotrex Website", addr: FROM });
     msg.setRecipient(TO);
-    msg.setHeader("Reply-To", email);   // ← hitting Reply goes to the visitor
-    msg.setSubject(`🌍 New Inquiry — ${name} from ${country}`);
-
+    // Add Reply-To so hitting Reply goes directly to the visitor
+    msg.setHeader("Reply-To", data.email);
     msg.addMessage({
       contentType: "text/html",
       data: `<!DOCTYPE html>
@@ -61,7 +60,7 @@ export default {
     <div class="row"><span class="label">Contact</span><span class="value">${contact}</span></div>
     <div class="row"><span class="label">Email</span><span class="value"><a href="mailto:${email}">${email}</a></span></div>
     <div class="row"><span class="label">Products</span><span class="value">${products || "—"}</span></div>
-    ${message ? `<div class="msg-box"><strong>Message:</strong><br/>${message.replace(/\n/g,"<br/>")}</div>` : ""}
+    ${message ? `<div class="msg-box"><strong>Message:</strong><br/>${message.replace(/\n/g, "<br/>")}</div>` : ""}
   </div>
   <div class="foot">Glotrex International · +91 8237840136 · Hit <strong>Reply</strong> to respond directly to ${email}</div>
 </div>
