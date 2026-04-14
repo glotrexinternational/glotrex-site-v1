@@ -141,26 +141,55 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selMobile) selMobile.value = saved;
   if (selMobileTop) selMobileTop.value = saved;
 
-  // Sync both selectors and handle language change
+  // Apply saved language on page load
+  if (saved !== 'en') {
+    document.cookie = `googtrans=/en/${saved}; path=/; max-age=31536000`;
+    // Wait a bit for Google Translate to load, then trigger it
+    setTimeout(() => {
+      triggerGoogleTranslate(saved);
+    }, 500);
+  }
+
+  // Helper: Find and trigger Google Translate's language change
+  const triggerGoogleTranslate = (lang) => {
+    // Try to find the Google Translate select in the page
+    const handleLanguageChange = () => {
+      const gtSelect = document.querySelector('select.goog-te-combo');
+      if (gtSelect) {
+        gtSelect.value = lang;
+        gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+      }
+      return false;
+    };
+
+    // Try immediately
+    if (handleLanguageChange()) return;
+
+    // If not found, wait and try again (GT might not be loaded yet)
+    let attempts = 0;
+    const timer = setInterval(() => {
+      if (handleLanguageChange()) {
+        clearInterval(timer);
+      }
+      attempts++;
+      if (attempts > 20) clearInterval(timer); // Stop after 10 seconds
+    }, 500);
+  };
+
+  // Sync and handle language change
   const handleLangChange = (lang) => {
     localStorage.setItem('glotrex_lang', lang);
     
-    // Set the cookie for Google Translate
+    // Update cookie
     if (lang === 'en') {
       document.cookie = 'googtrans=; Max-Age=0; path=/';
     } else {
       document.cookie = `googtrans=/en/${lang}; path=/; max-age=31536000`;
     }
     
-    // Attempt to trigger Google Translate language change
-    const gtSelect = document.querySelector('select.goog-te-combo');
-    if (gtSelect) {
-      gtSelect.value = lang;
-      gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
-    } else {
-      // Fallback to reload if Google Translate widget not found
-      location.reload();
-    }
+    // Trigger immediate language change without reload
+    triggerGoogleTranslate(lang);
   };
 
   const syncSelectors = (lang) => {
