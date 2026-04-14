@@ -391,19 +391,10 @@ p  { font-size:0.93rem; color:var(--ink-soft); line-height:1.8; }
 }
 .mobile-nav-close:hover { color:var(--ink); }
 
-/* Mobile Language Selector (Top Right) */
+/* Mobile Language Selector (Top Right) — Desktop Hidden */
 .mobile-lang-top {
   display: none;
-  /* position inside the navbar so it aligns with the hamburger reliably */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  /* default offset; media queries tighten this for smaller screens */
-  right: 4.2rem;
-  z-index: 910;
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
+  /* Hidden on desktop; shown only on mobile via media queries */
 }
 
 .lang-select-mobile-top {
@@ -1161,7 +1152,7 @@ footer { background:var(--ink); padding:68px 0 0; }
 
   .nav-links,.nav-cta { display:none; }
   .hamburger { display:flex; }
-  .mobile-lang-top { display: block; position: absolute; top: 50%; transform:translateY(-50%); right: 3.2rem; }
+  .mobile-lang-top { display: flex; position: absolute; top: 50%; transform:translateY(-50%); right: 3.2rem; z-index: 910; pointer-events: auto; align-items: center; }
   /* tighten position/size on medium phones so it fits between logo and hamburger */
   .lang-select-mobile-top { min-width: 78px; font-size:0.66rem; padding:0.24rem 0.4rem; height:36px; }
 
@@ -1186,7 +1177,7 @@ footer { background:var(--ink); padding:68px 0 0; }
   .stat-num { font-size:2.1rem; }
   .btn { padding:0.62rem 1.15rem; font-size:0.73rem; }
   /* extra tightening on very small screens */
-  .mobile-lang-top { right: 2.8rem; top: 50%; transform:translateY(-50%); }
+  .mobile-lang-top { display: flex; right: 2.8rem; top: 50%; transform:translateY(-50%); z-index: 910; pointer-events: auto; align-items: center; }
   .lang-select-mobile-top { min-width: 70px; font-size:0.62rem; padding:0.2rem 0.35rem; }
 }
 
