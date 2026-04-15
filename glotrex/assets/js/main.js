@@ -155,14 +155,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Write / clear the googtrans cookie ──
   const setCookieLang = (lang) => {
+    const attrs = location.protocol === 'https:' ? '; path=/; Secure; SameSite=None' : '; path=/';
+    const attrsPath = location.protocol === 'https:' ? `; path=${location.pathname}; Secure; SameSite=None` : `; path=${location.pathname}`;
+    
     if (lang === 'en') {
       // Clear on both / and current path so GT picks it up
-      document.cookie = 'googtrans=; Max-Age=0; path=/';
-      document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname;
+      document.cookie = `googtrans=; Max-Age=0${attrs}`;
+      document.cookie = `googtrans=; Max-Age=0${attrsPath}`;
     } else {
       const val = `/en/${lang}`;
-      document.cookie = `googtrans=${val}; path=/; max-age=31536000`;
-      document.cookie = `googtrans=${val}; path=${location.pathname}; max-age=31536000`;
+      document.cookie = `googtrans=${val}; max-age=31536000${attrs}`;
+      document.cookie = `googtrans=${val}; max-age=31536000${attrsPath}`;
     }
   };
 
@@ -176,8 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Handle user picking a new language ──
   const handleChange = (lang) => {
     if (lang === getCookieLang()) return; // already on this language, skip reload
-    setCookieLang(lang);
-    location.reload();                   // reload so GT applies the new cookie cleanly
+    
+    // Clear all possible cookie paths first
+    document.cookie = 'googtrans=; Max-Age=0; path=/';
+    document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname;
+    document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname + '/';
+    
+    // Wait a moment, then set new language and reload
+    setTimeout(() => {
+      setCookieLang(lang);
+      location.reload();
+    }, 100);
   };
 
   selectors.forEach(s => {
@@ -199,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
       company:  this.company.value,
       country:  this.country.value,
       contact:  this.contact.value,
+      email:    this.email.value,
       products: this.products.value,
       message:  this.message.value,
     };
