@@ -17,7 +17,7 @@ export default {
 
     const { name, company, country, contact, email, products, message } = await request.json();
 
-    if (!name || !country || !contact || !email) {
+    if (!name || !country || !email) {
       return new Response(JSON.stringify({ success: false, error: "Missing required fields." }), {
         status: 422, headers: { ...CORS, "Content-Type": "application/json" }
       });
@@ -27,7 +27,7 @@ export default {
     msg.setSender({ name: "Glotrex Website", addr: FROM });
     msg.setRecipient(TO);
     // Add Reply-To so hitting Reply goes directly to the visitor
-    msg.setHeader("Reply-To", data.email);
+    msg.setHeader("Reply-To", email);
     msg.addMessage({
       contentType: "text/html",
       data: `<!DOCTYPE html>
