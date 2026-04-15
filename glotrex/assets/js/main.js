@@ -138,6 +138,7 @@ function initAccordion() {
  * Fix: on change → write cookie → reload. On load → read cookie → sync UI.
  * This works every single time with zero retry logic needed.
  */
+/* ── 8. Google Translate ────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const selectors = [
     document.getElementById('langSelect'),
@@ -147,49 +148,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!selectors.length) return;
 
-  // ── Read current language from the googtrans cookie (source of truth) ──
+  // ── Read current language — checks ALL cookies, handles duplicates ──
   const getCookieLang = () => {
-    const match = document.cookie.match(/(?:^|;\s*)googtrans=\/en\/([^;]+)/);
-    return match ? match[1] : 'en';
+    // Get the LAST matching cookie (GT's own cookie wins over ours if duped)
+    const matches = [...document.cookie.matchAll(/googtrans=\/en\/([^;]+)/g)];
+    return matches.length ? matches[matches.length - 1][1].trim() : 'en';
   };
 
-  // ── Write / clear the googtrans cookie ──
+  // ── Nuke every possible googtrans cookie variation ──
+  const clearAllCookies = () => {
+    const paths = ['/', location.pathname, location.pathname + '/'];
+    const domains = [
+      '',
+      `; domain=${location.hostname}`,
+      `; domain=.${location.hostname}`,
+    ];
+    paths.forEach(path => {
+      domains.forEach(domain => {
+        document.cookie = `googtrans=; Max-Age=0; path=${path}${domain}`;
+      });
+    });
+  };
+
+  // ── Write the googtrans cookie on both root and current path ──
   const setCookieLang = (lang) => {
-    const attrs = location.protocol === 'https:' ? '; path=/; Secure; SameSite=None' : '; path=/';
-    const attrsPath = location.protocol === 'https:' ? `; path=${location.pathname}; Secure; SameSite=None` : `; path=${location.pathname}`;
-    
+    const secure = location.protocol === 'https:' ? '; Secure; SameSite=None' : '';
     if (lang === 'en') {
-      // Clear on both / and current path so GT picks it up
-      document.cookie = `googtrans=; Max-Age=0${attrs}`;
-      document.cookie = `googtrans=; Max-Age=0${attrsPath}`;
+      clearAllCookies();
     } else {
       const val = `/en/${lang}`;
-      document.cookie = `googtrans=${val}; max-age=31536000${attrs}`;
-      document.cookie = `googtrans=${val}; max-age=31536000${attrsPath}`;
+      const age = '; max-age=31536000';
+      document.cookie = `googtrans=${val}${age}; path=/${secure}`;
+      document.cookie = `googtrans=${val}${age}; path=${location.pathname}${secure}`;
     }
   };
 
-  // ── Sync all dropdowns to show the current active language ──
+  // ── Sync all dropdowns ──
   const syncUI = (lang) => selectors.forEach(s => { s.value = lang; });
 
-  // On page load: restore dropdowns to match whatever cookie is set
-  const currentLang = getCookieLang();
-  syncUI(currentLang);
+  // On load: restore dropdowns to match cookie
+  syncUI(getCookieLang());
 
   // ── Handle user picking a new language ──
   const handleChange = (lang) => {
-    if (lang === getCookieLang()) return; // already on this language, skip reload
-    
-    // Clear all possible cookie paths first
-    document.cookie = 'googtrans=; Max-Age=0; path=/';
-    document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname;
-    document.cookie = 'googtrans=; Max-Age=0; path=' + location.pathname + '/';
-    
-    // Wait a moment, then set new language and reload
+    clearAllCookies();               // wipe everything first — no stale cookies
     setTimeout(() => {
       setCookieLang(lang);
       location.reload();
-    }, 100);
+    }, 50);                          // small delay lets cookie writes settle
   };
 
   selectors.forEach(s => {
